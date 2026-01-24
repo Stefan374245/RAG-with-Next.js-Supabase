@@ -59,7 +59,7 @@ export function ChatInput({
 
   return (
     <form onSubmit={handleSubmit} className="relative">
-      <div className="relative">
+      <div className="relative flex items-center">
         <textarea
           ref={textareaRef}
           value={input}
@@ -69,8 +69,8 @@ export function ChatInput({
           disabled={disabled}
           rows={1}
           className={cn(
-            'w-full resize-none rounded-lg border border-gray-300 bg-white px-4 py-3 pr-12',
-            'placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent',
+            'w-full resize-none rounded-lg border-2 border-blue-700 bg-white px-4 py-3 pr-12',
+            'text-black placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-blue-800',
             'disabled:cursor-not-allowed disabled:opacity-50',
             'min-h-[52px] max-h-[200px]',
             isOverLimit && 'border-red-500 focus:ring-red-600'
@@ -82,7 +82,7 @@ export function ChatInput({
           type="submit"
           size="sm"
           disabled={disabled || isLoading || !input.trim() || isOverLimit}
-          className="absolute right-2 bottom-2"
+          className="absolute right-2 top-1/2 -translate-y-1/2"
           aria-label="Nachricht senden"
         >
           <Send className="w-4 h-4" />

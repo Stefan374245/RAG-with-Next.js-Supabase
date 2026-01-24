@@ -9,7 +9,7 @@ export interface ChatInputProps {
 export interface MessageBubbleProps {
   message: {
     id: string
-    role: 'user' | 'assistant'
+    role: string
     content: string
   }
   isStreaming?: boolean

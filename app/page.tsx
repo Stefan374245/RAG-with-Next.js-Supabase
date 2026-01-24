@@ -1,4 +1,4 @@
-import { ChatWindow } from '@/features/rag-chat/components/chat-window'
+import { ChatWindow } from '../features/rag-chat/components/chat-window'
 import { Sparkles, Database, Zap } from 'lucide-react'
 
 export default function Home() {

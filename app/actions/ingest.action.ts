@@ -1,7 +1,7 @@
 'use server'
 
-import { storeDocument } from '@/features/rag-chat/services/vector-service'
-import { APP_CONFIG } from '@/lib/constants'
+import { storeDocument } from '../../features/rag-chat/services/vector-service'
+import { APP_CONFIG } from '../../lib/constants'
 
 /**
  * Server Action for document ingestion

@@ -1,4 +1,4 @@
-import type { KnowledgeItem } from '@/types'
+import type { KnowledgeItem } from '../../../types'
 
 /**
  * Build an optimized RAG system prompt with retrieved context
@@ -20,9 +20,10 @@ Hinweis: Ich konnte keine spezifischen Dokumente zu dieser Frage finden. Bitte g
   // Build context from retrieved sources
   const context = sources
     .map((source, index) => {
+      const similarity = source.similarity ?? 0
       return `[${index + 1}] ${source.title}
 ${source.content}
-(Relevanz: ${(source.similarity * 100).toFixed(1)}%)`
+(Relevanz: ${(similarity * 100).toFixed(1)}%)`
     })
     .join('\n\n')
 

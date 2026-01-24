@@ -1,8 +1,8 @@
 'use client'
 
 import * as React from 'react'
-import { Card } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
+import { Card } from '../../../components/ui/card'
+import { Badge } from '../../../components/ui/badge'
 import { ChevronDown, ChevronUp, FileText } from 'lucide-react'
 import type { SourceListProps } from '../types'
 

@@ -1,7 +1,7 @@
 import { streamText } from 'ai'
-import { chatModel } from '@/lib/openai'
-import { searchKnowledge } from '@/features/rag-chat/services/vector-service'
-import { buildRAGPrompt } from '@/features/rag-chat/services/llm-service'
+import { chatModel } from '../../../lib/openai'
+import { searchKnowledge } from '../../../features/rag-chat/services/vector-service'
+import { buildRAGPrompt } from '../../../features/rag-chat/services/llm-service'
 
 export const runtime = 'edge'
 
@@ -51,22 +51,7 @@ export async function POST(req: Request) {
 
     // Return streaming response
     // The Vercel AI SDK automatically handles SSE formatting
-    return result.toDataStreamResponse({
-      // Include sources in the response metadata
-      getErrorMessage: (error) => {
-        console.error('Streaming error:', error)
-        return 'Ein Fehler ist beim Generieren der Antwort aufgetreten.'
-      },
-      // Send sources as part of the stream
-      data: {
-        sources: sources.map(source => ({
-          id: source.id,
-          title: source.title,
-          content: source.content.substring(0, 200) + '...', // Truncate for performance
-          similarity: source.similarity,
-        })),
-      },
-    })
+    return result.toDataStreamResponse()
   } catch (error) {
     console.error('Chat API error:', error)
     return new Response(

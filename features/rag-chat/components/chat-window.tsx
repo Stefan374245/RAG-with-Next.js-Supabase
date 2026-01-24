@@ -2,10 +2,10 @@
 
 import * as React from 'react'
 import { useChat } from 'ai/react'
-import { Card } from '@/components/ui/card'
-import { Spinner } from '@/components/ui/spinner'
+import { Card } from '../../../components/ui/card'
+import { Spinner } from '../../../components/ui/spinner'
 import { MessageBubble } from './message-bubble'
-import { ChatInput } from './chat-input'
+import { ChatInput } from '../components/chat-input'
 import { SourceList } from './source-list'
 import { ErrorBoundary } from './error-boundary'
 import { Bot, User } from 'lucide-react'
@@ -20,10 +20,15 @@ export function ChatWindow() {
 
   const { messages, input, handleInputChange, handleSubmit, isLoading, error } = useChat({
     api: '/api/chat',
-    onFinish: (message, options) => {
-      // Extract sources from response metadata if available
-      if (options?.data?.sources) {
-        setSources(options.data.sources)
+    onFinish: (message) => {
+      // Extract sources from message annotations if available
+      try {
+        const annotations = (message as any).annotations
+        if (annotations?.sources) {
+          setSources(annotations.sources)
+        }
+      } catch (err) {
+        console.error('Error extracting sources:', err)
       }
     },
     onError: (error) => {

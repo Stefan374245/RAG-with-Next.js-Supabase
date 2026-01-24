@@ -1,28 +1,38 @@
 'use client'
 
 import * as React from 'react'
-import { Button } from '@/components/ui/button'
+import { Button } from '../../../components/ui/button'
 import { Send } from 'lucide-react'
-import { cn } from '@/lib/utils'
-import { APP_CONFIG } from '@/lib/constants'
-import type { ChatInputProps } from '../types'
+import { cn } from '../../../lib/utils'
+import { APP_CONFIG } from '../../../lib/constants'
+
+export interface ChatInputProps {
+  onSend: (message: string) => void
+  disabled?: boolean
+  isLoading?: boolean
+  placeholder?: string
+}
 
 /**
- * Chat Input Component with character counter and enter-to-send
+ * Chat Input Component
+ * Handles user message input with send button
  */
-export function ChatInput({ onSend, isLoading, disabled }: ChatInputProps) {
+export function ChatInput({
+  onSend,
+  disabled = false,
+  isLoading = false,
+  placeholder = 'Stelle eine Frage...',
+}: ChatInputProps) {
   const [input, setInput] = React.useState('')
   const textareaRef = React.useRef<HTMLTextAreaElement>(null)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    
-    const trimmed = input.trim()
-    if (!trimmed || isLoading || disabled) return
+    if (!input.trim() || disabled || isLoading) return
 
-    onSend(trimmed)
+    onSend(input.trim())
     setInput('')
-    
+
     // Reset textarea height
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto'
@@ -30,73 +40,60 @@ export function ChatInput({ onSend, isLoading, disabled }: ChatInputProps) {
   }
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    // Submit on Enter (without Shift)
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
       handleSubmit(e)
     }
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const value = e.target.value
-    if (value.length <= APP_CONFIG.MAX_MESSAGE_LENGTH) {
-      setInput(value)
-      
-      // Auto-resize textarea
-      if (textareaRef.current) {
-        textareaRef.current.style.height = 'auto'
-        textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`
-      }
-    }
-  }
+  // Auto-resize textarea
+  React.useEffect(() => {
+    const textarea = textareaRef.current
+    if (!textarea) return
+
+    textarea.style.height = 'auto'
+    textarea.style.height = `${textarea.scrollHeight}px`
+  }, [input])
 
   const isOverLimit = input.length > APP_CONFIG.MAX_MESSAGE_LENGTH
-  const canSubmit = input.trim().length > 0 && !isLoading && !disabled && !isOverLimit
 
   return (
     <form onSubmit={handleSubmit} className="relative">
-      <div className="flex flex-col gap-2">
-        <div className="relative">
-          <textarea
-            ref={textareaRef}
-            value={input}
-            onChange={handleChange}
-            onKeyDown={handleKeyDown}
-            placeholder="Stelle eine Frage über React, Next.js oder RAG..."
-            disabled={isLoading || disabled}
-            rows={1}
-            className={cn(
-              'w-full resize-none rounded-lg border border-gray-300 px-4 py-3 pr-12',
-              'focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent',
-              'disabled:opacity-50 disabled:cursor-not-allowed',
-              'min-h-[52px] max-h-[200px]',
-              isOverLimit && 'border-red-500 focus:ring-red-600'
-            )}
-          />
-          <Button
-            type="submit"
-            size="sm"
-            disabled={!canSubmit}
-            className="absolute right-2 bottom-2"
-          >
-            <Send className="w-4 h-4" />
-          </Button>
-        </div>
+      <div className="relative">
+        <textarea
+          ref={textareaRef}
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={handleKeyDown}
+          placeholder={placeholder}
+          disabled={disabled}
+          rows={1}
+          className={cn(
+            'w-full resize-none rounded-lg border border-gray-300 bg-white px-4 py-3 pr-12',
+            'placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent',
+            'disabled:cursor-not-allowed disabled:opacity-50',
+            'min-h-[52px] max-h-[200px]',
+            isOverLimit && 'border-red-500 focus:ring-red-600'
+          )}
+          style={{ overflowY: input.length > 100 ? 'auto' : 'hidden' }}
+        />
         
-        <div className="flex items-center justify-between text-xs">
-          <span className="text-gray-500">
-            Drücke Enter zum Senden, Shift+Enter für neue Zeile
-          </span>
-          <span
-            className={cn(
-              'font-medium',
-              isOverLimit ? 'text-red-600' : 'text-gray-500'
-            )}
-          >
-            {input.length}/{APP_CONFIG.MAX_MESSAGE_LENGTH}
-          </span>
-        </div>
+        <Button
+          type="submit"
+          size="sm"
+          disabled={disabled || isLoading || !input.trim() || isOverLimit}
+          className="absolute right-2 bottom-2"
+          aria-label="Nachricht senden"
+        >
+          <Send className="w-4 h-4" />
+        </Button>
       </div>
+      
+      {isOverLimit && (
+        <p className="mt-1 text-sm text-red-600">
+          Nachricht zu lang ({input.length}/{APP_CONFIG.MAX_MESSAGE_LENGTH} Zeichen)
+        </p>
+      )}
     </form>
   )
 }

@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { cn, formatTimestamp } from '@/lib/utils'
+import { cn, formatTimestamp } from '../../../lib/utils'
 import type { MessageBubbleProps } from '../types'
 
 /**

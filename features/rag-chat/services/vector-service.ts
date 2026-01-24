@@ -1,20 +1,20 @@
-import { embedMany } from 'ai'
-import { embeddingModel } from '@/lib/openai'
-import { supabaseAdmin } from '@/lib/supabase'
-import { APP_CONFIG } from '@/lib/constants'
-import type { KnowledgeItem } from '@/types'
+import { embed } from 'ai'
+import { embeddingModel } from '../../../lib/openai'
+import { supabaseAdmin } from '../../../lib/supabase'
+import { APP_CONFIG } from '../../../lib/constants'
+import type { KnowledgeItem } from '../../../types'
 
 /**
  * Generate embedding vector for a given text using OpenAI
  */
 export async function generateEmbedding(text: string): Promise<number[]> {
   try {
-    const { embeddings } = await embedMany({
+    const { embedding } = await embed({
       model: embeddingModel,
-      values: [text],
+      value: text,
     })
     
-    return embeddings[0] || []
+    return embedding
   } catch (error) {
     console.error('Error generating embedding:', error)
     throw new Error('Failed to generate embedding')

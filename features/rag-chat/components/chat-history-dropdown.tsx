@@ -95,17 +95,17 @@ export function ChatHistoryDropdown({
 
   return (
     <div className="relative" ref={dropdownRef}>
-      {/* Trigger Button */}
+      {/* Trigger Button - Modern */}
       <Button
         onClick={() => setIsOpen(!isOpen)}
         size="sm"
         variant="ghost"
-        className="text-white hover:bg-blue-700 gap-1"
+        className="text-white hover:glass-strong gap-1.5 transition-all duration-300"
       >
         <History className="w-4 h-4" />
-        <span className="hidden sm:inline">Verlauf</span>
+        <span className="hidden sm:inline font-medium">Verlauf</span>
         <ChevronDown className={cn(
-          "w-3 h-3 transition-transform",
+          "w-3.5 h-3.5 transition-transform duration-300",
           isOpen && "rotate-180"
         )} />
       </Button>
@@ -113,26 +113,26 @@ export function ChatHistoryDropdown({
       {/* Backdrop - closes dropdown when clicked */}
       {isOpen && (
         <div 
-          className="fixed inset-0 z-40" 
+          className="fixed inset-0 z-[100]" 
           onClick={() => setIsOpen(false)}
         />
       )}
 
-      {/* Dropdown Menu */}
+      {/* Dropdown Menu - Modern Dark */}
       {isOpen && (
-        <div className="absolute top-full right-0 mt-2 w-[calc(100vw-7rem)] sm:w-96 bg-white rounded-lg shadow-2xl border border-gray-200 z-50 animate-in fade-in slide-in-from-top-2">
-          {/* Header */}
-          <div className="p-3 sm:p-4 border-b border-gray-200">
+        <div className="absolute top-full right-0 mt-2 w-[calc(100vw-7rem)] sm:w-96 glass-strong rounded-2xl shadow-glow-primary border border-white/10 z-[101] animate-in fade-in slide-in-from-top-2 backdrop-blur-xl">
+          {/* Header - Modern */}
+          <div className="p-3 sm:p-4 border-b border-white/10">
             <div className="flex items-center justify-between mb-2 sm:mb-3">
-              <h3 className="text-xs sm:text-sm font-semibold text-gray-900 flex items-center gap-2">
-                <History className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <h3 className="text-xs sm:text-sm font-semibold text-white flex items-center gap-2">
+                <History className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary-light" />
                 Chat-Verlauf
               </h3>
             </div>
             <Button
               onClick={handleNewChat}
               size="sm"
-              className="w-full text-xs sm:text-sm"
+              className="w-full text-xs sm:text-sm shine"
               variant="primary"
             >
               <MessageSquare className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-2" />
@@ -141,39 +141,48 @@ export function ChatHistoryDropdown({
           </div>
 
           {/* Sessions List */}
-          <div className="max-h-[60vh] sm:max-h-96 overflow-y-auto p-2">
+          <div className="max-h-[60vh] sm:max-h-96 overflow-y-auto p-3 scrollbar-thin">
             {isLoading ? (
               <div className="flex items-center justify-center py-8">
                 <Spinner size="sm" />
               </div>
             ) : sessions.length === 0 ? (
-              <div className="text-center py-6 sm:py-8 px-4">
-                <History className="w-10 h-10 sm:w-12 sm:h-12 text-gray-300 mx-auto mb-2 sm:mb-3" />
-                <p className="text-xs sm:text-sm text-gray-500">
+              <div className="text-center py-6 sm:py-8 px-4 animate-in fade-in">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-primary/20 rounded-2xl flex items-center justify-center mx-auto mb-3">
+                  <History className="w-6 h-6 sm:w-7 sm:h-7 text-primary-light" />
+                </div>
+                <p className="text-sm text-gray-400 font-medium">
                   Noch keine Chat-Verläufe
+                </p>
+                <p className="text-xs text-gray-500 mt-1">
+                  Starte einen neuen Chat oben
                 </p>
               </div>
             ) : (
-              <div className="space-y-1">
-                {sessions.map((session) => (
+              <div className="space-y-1.5">
+                {sessions.map((session, index) => (
                   <div
                     key={session.session_id}
                     onClick={() => handleLoadSession(session.session_id)}
                     className={cn(
-                      'w-full text-left p-2.5 sm:p-3 rounded-lg hover:bg-gray-100 transition-colors group cursor-pointer',
-                      session.session_id === currentSessionId && 'bg-blue-50 hover:bg-blue-100'
+                      'w-full text-left p-3 rounded-xl transition-all duration-300 group cursor-pointer border',
+                      'hover:border-primary/30 hover:glass-strong hover:scale-[1.01] hover:shadow-lg',
+                      session.session_id === currentSessionId 
+                        ? 'glass-strong border-primary/30 shadow-glow-primary scale-[1.01]' 
+                        : 'border-transparent hover-lift'
                     )}
+                    style={{ animationDelay: `${index * 30}ms` }}
                   >
-                    <div className="flex items-start justify-between gap-2">
+                    <div className="flex items-start justify-between gap-3">
                       <div className="flex-1 min-w-0">
-                        <p className="text-xs sm:text-sm font-medium text-gray-900 truncate">
+                        <p className="text-sm font-semibold text-white truncate group-hover:text-primary-light transition-colors">
                           {truncateMessage(session.last_message)}
                         </p>
-                        <div className="flex items-center gap-2 mt-1">
-                          <span className="text-xs text-gray-500">
+                        <div className="flex items-center gap-2 mt-1.5">
+                          <span className="text-xs text-gray-400 font-medium">
                             {formatDate(session.created_at)}
                           </span>
-                          <span className="text-xs text-gray-400">
+                          <span className="text-xs text-gray-500">
                             • {session.message_count} Nachr.
                           </span>
                         </div>
@@ -183,10 +192,11 @@ export function ChatHistoryDropdown({
                           e.stopPropagation()
                           handleDelete(session.session_id, e)
                         }}
-                        className="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 p-1 hover:bg-red-100 rounded transition-opacity flex-shrink-0"
+                        className="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 p-1.5 hover:bg-red-500/20 rounded-lg transition-all duration-300 flex-shrink-0 border border-transparent hover:border-red-500/40 hover:scale-110"
                         aria-label="Löschen"
+                        title="Session löschen"
                       >
-                        <Trash2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-red-600" />
+                        <Trash2 className="w-4 h-4 text-red-400 hover:text-red-300" />
                       </button>
                     </div>
                   </div>

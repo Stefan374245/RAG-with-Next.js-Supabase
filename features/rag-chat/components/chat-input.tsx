@@ -59,7 +59,7 @@ export function ChatInput({
 
   return (
     <form onSubmit={handleSubmit} className="relative">
-      <div className="relative flex items-center">
+      <div className="flex items-center">
         <textarea
           ref={textareaRef}
           value={input}
@@ -69,11 +69,12 @@ export function ChatInput({
           disabled={disabled}
           rows={1}
           className={cn(
-            'w-full resize-none rounded-lg border-2 border-blue-700 bg-white px-4 py-3 pr-12',
-            'text-black placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-blue-800',
-            'disabled:cursor-not-allowed disabled:opacity-50',
-            'min-h-[52px] max-h-[200px]',
-            isOverLimit && 'border-red-500 focus:ring-red-600'
+            'w-full resize-none rounded-xl glass-strong px-5 py-4 pr-14',
+            'text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary/50',
+            'disabled:cursor-not-allowed disabled:opacity-50 border border-white/10',
+            'min-h-[56px] max-h-[200px] transition-all duration-300',
+            'hover:border-white/20 focus:shadow-glow-primary',
+            isOverLimit && 'border-red-500/50 focus:ring-red-500 focus:shadow-none'
           )}
           style={{ overflowY: input.length > 100 ? 'auto' : 'hidden' }}
         />
@@ -82,7 +83,7 @@ export function ChatInput({
           type="submit"
           size="sm"
           disabled={disabled || isLoading || !input.trim() || isOverLimit}
-          className="absolute right-2 top-1/2 -translate-y-1/2"
+          className="absolute right-2 top-1/2 -translate-y-1/2 bg-gradient-primary hover:shadow-glow-primary transition-all duration-300 shine"
           aria-label="Nachricht senden"
         >
           <Send className="w-4 h-4" />
@@ -90,7 +91,7 @@ export function ChatInput({
       </div>
       
       {isOverLimit && (
-        <p className="mt-1 text-sm text-red-600">
+        <p className="mt-2 text-sm text-red-400 animate-in fade-in slide-in-from-bottom-2">
           Nachricht zu lang ({input.length}/{APP_CONFIG.MAX_MESSAGE_LENGTH} Zeichen)
         </p>
       )}

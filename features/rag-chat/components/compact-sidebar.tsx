@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { Info, Settings, Trash2, Database } from 'lucide-react'
+import { Info, Settings, Trash2, Database, Menu, X } from 'lucide-react'
 import { cn } from '../../../lib/utils'
 import { ChatHistoryService } from '../services/chat-history-service'
 
@@ -11,12 +11,45 @@ interface CompactSidebarProps {
 }
 
 /**
+ * Simple Burger Menu Icon Component
+ */
+function BurgerMenu({ isOpen, onClick }: { isOpen: boolean; onClick: () => void }) {
+  return (
+    <button
+      onClick={onClick}
+      className="glass-strong p-2 md:p-3 rounded-xl border border-white/10 hover:border-primary/30 transition-all duration-300 hover-lift shadow-glow-primary"
+      aria-label="Toggle menu"
+    >
+      {isOpen ? (
+        <X className="w-5 md:w-6 h-5 md:h-6 text-white" />
+      ) : (
+        <Menu className="w-5 md:w-6 h-5 md:h-6 text-white" />
+      )}
+    </button>
+  )
+}
+
+/**
  * Compact Sidebar Component
- * Expands on hover to show options
+ * Desktop: Expands on hover
+ * Mobile: Controlled via Burger Menu
  */
 export function CompactSidebar({ onOpenSystemInfo, onClearHistory }: CompactSidebarProps) {
   const [isExpanded, setIsExpanded] = React.useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false)
   const [isClearing, setIsClearing] = React.useState(false)
+  const [isMobile, setIsMobile] = React.useState(false)
+
+  // Detect mobile/desktop
+  React.useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   const handleClearHistory = async () => {
     if (!window.confirm('Wirklich ALLE Chat-Sessions löschen? Diese Aktion kann nicht rückgängig gemacht werden!')) {
@@ -99,42 +132,76 @@ export function CompactSidebar({ onOpenSystemInfo, onClearHistory }: CompactSide
   }
 
   return (
-    <div
-      onMouseEnter={() => setIsExpanded(true)}
-      onMouseLeave={() => setIsExpanded(false)}
-      className={cn(
-        'fixed left-0 top-0 h-screen bg-gradient-to-b from-gray-900 to-gray-800 shadow-2xl transition-all duration-300 z-30',
-        isExpanded ? 'w-56' : 'w-16'
-      )}
-    >
-      <div className="flex flex-col h-full py-6">
-        {/* Logo/Icon */}
-        <div className="px-4 mb-8">
-          <div className={cn(
-            "w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center",
-            "transition-all duration-300",
-            isExpanded && "w-full h-12"
-          )}>
-            <Settings className={cn(
-              "text-white transition-all",
-              isExpanded ? "w-6 h-6" : "w-5 h-5"
-            )} />
-          </div>
+    <>
+      {/* Burger Menu - Nur für Mobile */}
+      {isMobile && (
+        <div className="fixed top-4 left-4 z-50">
+          <BurgerMenu
+            isOpen={isMobileMenuOpen}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          />
         </div>
+      )}
+
+      {/* Backdrop für Mobile */}
+      {isMobile && isMobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40 md:hidden"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+
+      {/* Sidebar */}
+      <div
+        onMouseEnter={() => !isMobile && setIsExpanded(true)}
+        onMouseLeave={() => !isMobile && setIsExpanded(false)}
+        className={cn(
+          'fixed left-0 top-0 h-screen glass-strong shadow-glow-primary transition-all duration-500 ease-out',
+          'border-r border-white/10',
+          // Desktop: hover to expand, z-30
+          // Mobile: burger menu control, z-50 when open
+          isMobile ? 'z-50' : 'z-30',
+          isMobile
+            ? isMobileMenuOpen
+              ? 'w-64 translate-x-0'
+              : 'w-0 -translate-x-full'
+            : isExpanded
+            ? 'w-56'
+            : 'w-16'
+        )}
+      >
+        <div className="flex flex-col h-full py-6">
+          {/* Logo/Icon */}
+          <div className={cn('px-4 mb-8', isMobile && !isMobileMenuOpen && 'hidden')}>
+            <div className={cn(
+              "w-8 h-8 bg-gradient-primary rounded-xl flex items-center justify-center",
+              "transition-all duration-500 ease-out shadow-glow-primary hover:shadow-glow-primary-lg",
+              "hover:scale-105 cursor-pointer",
+              (isExpanded || (isMobile && isMobileMenuOpen)) && "w-full h-12"
+            )}>
+              <Settings className={cn(
+                "text-white transition-all duration-300 animate-pulse-glow",
+                (isExpanded || (isMobile && isMobileMenuOpen)) ? "w-6 h-6" : "w-5 h-5"
+              )} />
+            </div>
+          </div>
 
         {/* Menu Items */}
-        <nav className="flex-1 px-3 space-y-2">
+        <nav className={cn('flex-1 px-3 space-y-2', isMobile && !isMobileMenuOpen && 'hidden')}>
           {/* System Info */}
           <button
-            onClick={onOpenSystemInfo}
+            onClick={() => {
+              onOpenSystemInfo()
+              if (isMobile) setIsMobileMenuOpen(false)
+            }}
             className={cn(
-              'w-full flex items-center gap-3 px-3 py-3 rounded-lg',
-              'text-gray-300 hover:bg-gray-700 hover:text-white',
-              'transition-all duration-200 group'
+              'w-full flex items-center gap-3 px-3 py-3 rounded-xl shine',
+              'text-gray-300 hover:glass-strong hover:text-white hover:border-primary/30',
+              'transition-all duration-300 group border border-transparent'
             )}
           >
-            <Info className="w-5 h-5 flex-shrink-0" />
-            {isExpanded && (
+            <Info className="w-5 h-5 flex-shrink-0 group-hover:text-primary-light group-hover:scale-110 transition-all duration-300" />
+            {(isExpanded || (isMobile && isMobileMenuOpen)) && (
               <span className="text-sm font-medium animate-in fade-in slide-in-from-left-2">
                 System Info
               </span>
@@ -142,23 +209,26 @@ export function CompactSidebar({ onOpenSystemInfo, onClearHistory }: CompactSide
           </button>
 
           {/* Divider */}
-          {isExpanded && (
-            <div className="h-px bg-gray-700 my-4 animate-in fade-in" />
+          {(isExpanded || (isMobile && isMobileMenuOpen)) && (
+            <div className="h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent my-4 animate-in fade-in" />
           )}
 
           {/* Clear History */}
           <button
-            onClick={handleClearHistory}
+            onClick={() => {
+              handleClearHistory()
+              if (isMobile) setIsMobileMenuOpen(false)
+            }}
             disabled={isClearing}
             className={cn(
-              'w-full flex items-center gap-3 px-3 py-3 rounded-lg',
-              'text-gray-300 hover:bg-red-600 hover:text-white',
-              'transition-all duration-200 group',
+              'w-full flex items-center gap-3 px-3 py-3 rounded-xl shine',
+              'text-gray-300 hover:glass-strong hover:text-red-400 hover:border-red-500/30',
+              'transition-all duration-300 group border border-transparent',
               'disabled:opacity-50 disabled:cursor-not-allowed'
             )}
           >
-            <Trash2 className="w-5 h-5 flex-shrink-0" />
-            {isExpanded && (
+            <Trash2 className="w-5 h-5 flex-shrink-0 group-hover:text-red-400 group-hover:scale-110 transition-all duration-300" />
+            {(isExpanded || (isMobile && isMobileMenuOpen)) && (
               <span className="text-sm font-medium animate-in fade-in slide-in-from-left-2">
                 {isClearing ? 'Löschen...' : 'Clear History'}
               </span>
@@ -167,15 +237,18 @@ export function CompactSidebar({ onOpenSystemInfo, onClearHistory }: CompactSide
 
           {/* Clear Cache */}
           <button
-            onClick={handleClearCache}
+            onClick={() => {
+              handleClearCache()
+              if (isMobile) setIsMobileMenuOpen(false)
+            }}
             className={cn(
-              'w-full flex items-center gap-3 px-3 py-3 rounded-lg',
-              'text-gray-300 hover:bg-gray-700 hover:text-white',
-              'transition-all duration-200 group'
+              'w-full flex items-center gap-3 px-3 py-3 rounded-xl shine',
+              'text-gray-300 hover:glass-strong hover:text-white hover:border-primary/30',
+              'transition-all duration-300 group border border-transparent'
             )}
           >
-            <Database className="w-5 h-5 flex-shrink-0" />
-            {isExpanded && (
+            <Database className="w-5 h-5 flex-shrink-0 group-hover:text-primary-light group-hover:scale-110 transition-all duration-300" />
+            {(isExpanded || (isMobile && isMobileMenuOpen)) && (
               <span className="text-sm font-medium animate-in fade-in slide-in-from-left-2">
                 Clear Cache
               </span>
@@ -184,17 +257,18 @@ export function CompactSidebar({ onOpenSystemInfo, onClearHistory }: CompactSide
         </nav>
 
         {/* Bottom Section */}
-        {isExpanded && (
-          <div className="px-4 pt-4 border-t border-gray-700 animate-in fade-in slide-in-from-left-2">
-            <p className="text-xs text-gray-400">
+        {(isExpanded || (isMobile && isMobileMenuOpen)) && (
+          <div className="px-4 pt-4 border-t border-white/5 animate-in fade-in slide-in-from-left-2">
+            <p className="text-xs text-gray-400 font-medium">
               RAG Challenge Demo
             </p>
-            <p className="text-xs text-gray-500 mt-1">
-              v1.0.0
+            <p className="text-xs text-gray-600 mt-1">
+              v1.0.0 • 2026
             </p>
           </div>
         )}
       </div>
     </div>
+    </>
   )
 }

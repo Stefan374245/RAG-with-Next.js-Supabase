@@ -6,20 +6,20 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 /**
- * Card Container Component
+ * Card Container Component - Modern 2026 Design
  */
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
   ({ className, variant = 'default', ...props }, ref) => {
     const variants = {
-      default: 'bg-white rounded-lg',
-      bordered: 'bg-white border border-gray-200 rounded-lg',
-      elevated: 'bg-white rounded-lg shadow-md',
+      default: 'glass rounded-2xl',
+      bordered: 'glass border border-white/10 rounded-2xl',
+      elevated: 'glass-strong rounded-2xl shadow-glow-primary',
     }
 
     return (
       <div
         ref={ref}
-        className={cn(variants[variant], className)}
+        className={cn(variants[variant], 'transition-all duration-300', className)}
         {...props}
       />
     )
@@ -32,7 +32,7 @@ const CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDiv
   ({ className, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn('flex flex-col space-y-1.5 p-6', className)}
+      className={cn('flex flex-col space-y-2 p-6', className)}
       {...props}
     />
   )
@@ -44,7 +44,7 @@ const CardTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTML
   ({ className, ...props }, ref) => (
     <h3
       ref={ref}
-      className={cn('text-2xl font-semibold leading-none tracking-tight', className)}
+      className={cn('text-2xl font-bold leading-none tracking-tight text-white', className)}
       {...props}
     />
   )

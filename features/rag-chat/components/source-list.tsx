@@ -18,45 +18,45 @@ export function SourceList({ sources }: SourceListProps) {
   }
 
   return (
-    <Card variant="bordered" className="mb-4 overflow-hidden">
+    <Card variant="bordered" className="mb-4 overflow-hidden glass-strong border-white/10">
       <button
         onClick={() => setExpanded(!expanded)}
-        className="w-full flex items-center justify-between p-4 hover:bg-gray-50 transition-colors"
+        className="w-full flex items-center justify-between p-4 hover:glass transition-all duration-300 group"
       >
-        <div className="flex items-center gap-2">
-          <FileText className="w-5 h-5 text-blue-600" />
-          <span className="font-medium text-gray-900">
+        <div className="flex items-center gap-3">
+          <FileText className="w-5 h-5 text-primary-light group-hover:scale-110 transition-transform duration-300" />
+          <span className="font-medium text-white">
             {sources.length} relevante Quelle{sources.length !== 1 ? 'n' : ''} gefunden
           </span>
         </div>
         {expanded ? (
-          <ChevronUp className="w-5 h-5 text-gray-500" />
+          <ChevronUp className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
         ) : (
-          <ChevronDown className="w-5 h-5 text-gray-500" />
+          <ChevronDown className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
         )}
       </button>
 
       {expanded && (
-        <div className="border-t border-gray-200 p-4 space-y-3 animate-in slide-in-from-top-2">
+        <div className="border-t border-white/10 p-4 space-y-3 animate-in slide-in-from-top-2">
           {sources.map((source, index) => (
             <div
               key={source.id}
-              className="p-3 bg-gray-50 rounded-lg"
+              className="p-4 glass rounded-xl hover:glass-strong transition-all duration-300 hover-lift border border-white/5"
             >
-              <div className="flex items-start justify-between gap-2 mb-2">
+              <div className="flex items-start justify-between gap-3 mb-2">
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-medium text-gray-700">
+                  <span className="text-sm font-semibold text-primary-light">
                     [{index + 1}]
                   </span>
-                  <span className="text-sm font-medium text-gray-900">
+                  <span className="text-sm font-medium text-white">
                     {source.title}
                   </span>
                 </div>
-                <Badge variant="default">
+                <Badge variant="default" className="bg-gradient-primary text-white border-0 shadow-glow-primary">
                   {(source.similarity * 100).toFixed(0)}% Match
                 </Badge>
               </div>
-              <p className="text-sm text-gray-600 line-clamp-3">
+              <p className="text-sm text-gray-400 line-clamp-3 leading-relaxed">
                 {source.content}
               </p>
             </div>

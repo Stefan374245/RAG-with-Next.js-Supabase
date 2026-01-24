@@ -73,28 +73,30 @@ export function ChatWindow() {
 
   return (
     <ErrorBoundary>
-      <Card variant="elevated" className="w-full h-full flex flex-col shadow-lg">
-        {/* Header - Compact */}
-        <div className="flex items-center gap-2 p-4 border-b border-gray-200 bg-gradient-to-r from-blue-600 to-blue-700">
-          <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-            <Bot className="w-5 h-5 text-blue-600" />
+      <Card variant="elevated" className="w-full h-full flex flex-col glass-strong border border-white/10 shadow-glow-primary overflow-hidden">
+        {/* Header - Modern Gradient */}
+        <div className="flex items-center gap-3 p-4 border-b border-white/10 bg-gradient-to-r from-primary/20 via-primary/10 to-accent/20 backdrop-blur-xl">
+          <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center shadow-glow-primary animate-pulse-glow">
+            <Bot className="w-5 h-5 text-white" />
           </div>
           <div>
             <h2 className="text-lg font-semibold text-white">RAG Assistant</h2>
-            <p className="text-xs text-blue-100">Powered by React 19 & Next.js 15</p>
+            <p className="text-xs text-gray-400 font-light">Powered by React 19 & Next.js 15</p>
           </div>
         </div>
 
         {/* Messages Area - Scrollable */}
-        <div className="flex-1 overflow-y-auto p-4 bg-gray-50">
+        <div className="flex-1 overflow-y-auto p-4 bg-surface/30 backdrop-blur-sm">
           {messages.length === 0 ? (
             <div className="h-full flex items-center justify-center">
-              <div className="text-center">
-                <Bot className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-                <h3 className="text-base font-medium text-gray-900 mb-2">
+              <div className="text-center animate-in fade-in slide-in-from-bottom-2">
+                <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-glow-primary animate-float">
+                  <Bot className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-lg font-semibold text-white mb-2">
                   Willkommen beim RAG Assistant
                 </h3>
-                <p className="text-sm text-gray-600 max-w-md">
+                <p className="text-sm text-gray-400 max-w-md font-light">
                   Stelle Fragen über React, Next.js, RAG-Systeme oder die Vercel AI SDK.
                   Das System durchsucht die Wissensdatenbank semantisch.
                 </p>
@@ -117,9 +119,9 @@ export function ChatWindow() {
               
               {/* Loading indicator */}
               {isLoading && messages[messages.length - 1]?.role === 'user' && (
-                <div className="flex items-center gap-2 text-gray-500 mb-4">
+                <div className="flex items-center gap-3 text-gray-400 mb-4 glass px-4 py-3 rounded-xl animate-in fade-in slide-in-from-bottom-2">
                   <Spinner size="sm" />
-                  <span className="text-sm">Durchsuche Wissensdatenbank...</span>
+                  <span className="text-sm font-light">Durchsuche Wissensdatenbank...</span>
                 </div>
               )}
               
@@ -128,17 +130,17 @@ export function ChatWindow() {
           )}
         </div>
 
-        {/* Error Display - Compact */}
+        {/* Error Display - Modern */}
         {error && (
-          <div className="px-4 py-2 bg-red-50 border-t border-red-200">
-            <p className="text-xs text-red-600">
-              <strong>Fehler:</strong> {error.message}
+          <div className="px-4 py-3 glass-strong border-t border-red-500/20 backdrop-blur-xl">
+            <p className="text-sm text-red-400">
+              <strong className="font-semibold">Fehler:</strong> {error.message}
             </p>
           </div>
         )}
 
-        {/* Input Area - Compact */}
-        <div className="p-4 border-t border-gray-200 bg-white">
+        {/* Input Area - Modern */}
+        <div className="p-4 border-t border-white/10 glass backdrop-blur-xl">
           <ChatInput
             onSend={handleSend}
             isLoading={isLoading}

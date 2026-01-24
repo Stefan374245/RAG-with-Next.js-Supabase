@@ -24,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de" className={inter.variable}>
-      <body className="antialiased bg-gray-50 min-h-screen">
+      <body className="antialiased bg-gray-50 min-h-screen" suppressHydrationWarning>
         {children}
       </body>
     </html>

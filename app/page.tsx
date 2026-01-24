@@ -1,81 +1,67 @@
-import { ChatWindow } from '../features/rag-chat/components/chat-window'
+import { ChatWindowWithHistory } from '../features/rag-chat/components/chat-window-with-history'
 import { Sparkles, Database, Zap } from 'lucide-react'
 
 export default function Home() {
   return (
-    <main className="min-h-screen py-12 px-4">
-      <div className="max-w-6xl mx-auto">
-        {/* Hero Section */}
-        <div className="text-center mb-12">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Sparkles className="w-8 h-8 text-blue-600" />
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
+    <main className="h-screen overflow-hidden flex flex-col py-6 pl-20 pr-4 bg-gradient-to-br from-gray-50 to-gray-100">
+      <div className="max-w-6xl mx-auto w-full flex flex-col h-full">
+        {/* Hero Section - Compact */}
+        <div className="text-center mb-6">
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <Sparkles className="w-6 h-6 text-blue-600" />
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
               RAG Challenge Demo
             </h1>
           </div>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-6">
+          <p className="text-sm text-gray-600 mb-4">
             Semantische Suche mit Retrieval-Augmented Generation
           </p>
           
           {/* Tech Stack Badges */}
-          <div className="flex flex-wrap items-center justify-center gap-3 text-sm">
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-white rounded-full border border-gray-200">
-              <Zap className="w-4 h-4 text-blue-600" />
-              <span className="font-medium">Next.js 15 + React 19</span>
+          <div className="flex flex-wrap items-center justify-center gap-2 text-xs">
+            <div className="flex items-center gap-1.5 px-2.5 py-1 bg-blue-600 rounded-full shadow-md">
+              <Zap className="w-3.5 h-3.5 text-white" />
+              <span className="font-semibold text-white">Next.js 15 + React 19</span>
             </div>
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-white rounded-full border border-gray-200">
-              <Database className="w-4 h-4 text-green-600" />
-              <span className="font-medium">Supabase + pgvector</span>
+            <div className="flex items-center gap-1.5 px-2.5 py-1 bg-green-600 rounded-full shadow-md">
+              <Database className="w-3.5 h-3.5 text-white" />
+              <span className="font-semibold text-white">Supabase + pgvector</span>
             </div>
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-white rounded-full border border-gray-200">
+            <div className="flex items-center gap-1.5 px-2.5 py-1 bg-purple-600 rounded-full shadow-md">
+              <Sparkles className="w-3.5 h-3.5 text-white" />
+              <span className="font-semibold text-white">Vercel AI SDK</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Chat Interface - Takes remaining space */}
+        <div className="flex-1 min-h-0 mb-4">
+          <ChatWindowWithHistory />
+        </div>
+
+        {/* Features Section - Compact */}
+        <div className="grid md:grid-cols-3 gap-3 text-center">
+          <div className="bg-white/80 backdrop-blur-sm p-3 rounded-lg border border-gray-200 shadow-sm">
+            <div className="flex items-center justify-center gap-2">
+              <Database className="w-4 h-4 text-blue-600" />
+              <h3 className="text-xs font-semibold text-gray-900">Vector Search</h3>
+            </div>
+          </div>
+          
+          <div className="bg-white/80 backdrop-blur-sm p-3 rounded-lg border border-gray-200 shadow-sm">
+            <div className="flex items-center justify-center gap-2">
+              <Zap className="w-4 h-4 text-green-600" />
+              <h3 className="text-xs font-semibold text-gray-900">Real-time Streaming</h3>
+            </div>
+          </div>
+          
+          <div className="bg-white/80 backdrop-blur-sm p-3 rounded-lg border border-gray-200 shadow-sm">
+            <div className="flex items-center justify-center gap-2">
               <Sparkles className="w-4 h-4 text-purple-600" />
-              <span className="font-medium">Vercel AI SDK</span>
+              <h3 className="text-xs font-semibold text-gray-900">React 19 Features</h3>
             </div>
           </div>
         </div>
-
-        {/* Chat Interface */}
-        <ChatWindow />
-
-        {/* Features Section */}
-        <div className="mt-12 grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-          <div className="bg-white p-6 rounded-lg border border-gray-200">
-            <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mb-3">
-              <Database className="w-5 h-5 text-blue-600" />
-            </div>
-            <h3 className="font-semibold text-gray-900 mb-2">Vector Search</h3>
-            <p className="text-sm text-gray-600">
-              Semantische Suche mit pgvector und OpenAI Embeddings für präzise Ergebnisse
-            </p>
-          </div>
-          
-          <div className="bg-white p-6 rounded-lg border border-gray-200">
-            <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mb-3">
-              <Zap className="w-5 h-5 text-green-600" />
-            </div>
-            <h3 className="font-semibold text-gray-900 mb-2">Real-time Streaming</h3>
-            <p className="text-sm text-gray-600">
-              LLM-Antworten werden in Echtzeit gestreamt für optimale User Experience
-            </p>
-          </div>
-          
-          <div className="bg-white p-6 rounded-lg border border-gray-200">
-            <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mb-3">
-              <Sparkles className="w-5 h-5 text-purple-600" />
-            </div>
-            <h3 className="font-semibold text-gray-900 mb-2">React 19 Features</h3>
-            <p className="text-sm text-gray-600">
-              React Compiler, Server Actions und moderne Hooks für Clean Code
-            </p>
-          </div>
-        </div>
-
-        {/* Footer */}
-        <footer className="mt-12 text-center text-sm text-gray-500">
-          <p>
-            Built with Next.js 15, React 19, Vercel AI SDK, Supabase, and OpenAI
-          </p>
-        </footer>
       </div>
     </main>
   )

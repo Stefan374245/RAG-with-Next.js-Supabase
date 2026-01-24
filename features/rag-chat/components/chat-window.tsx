@@ -18,7 +18,7 @@ export function ChatWindow() {
   const messagesEndRef = React.useRef<HTMLDivElement>(null)
   const [sources, setSources] = React.useState<any[]>([])
 
-  const { messages, input, handleInputChange, handleSubmit, isLoading, error } = useChat({
+  const { messages, append, isLoading, error } = useChat({
     api: '/api/chat',
     onFinish: (message) => {
       // Extract sources from message annotations if available
@@ -41,9 +41,10 @@ export function ChatWindow() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
 
-  const handleSend = (message: string) => {
-    handleSubmit(new Event('submit') as any, {
-      data: { message },
+  const handleSend = async (message: string) => {
+    await append({
+      role: 'user',
+      content: message,
     })
   }
 

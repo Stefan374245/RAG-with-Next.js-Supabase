@@ -5,13 +5,22 @@
  * Usage: npm run seed
  */
 
+// Load .env.local FIRST
 import { config } from 'dotenv'
 import { resolve } from 'path'
-
-// Load .env.local file
 config({ path: resolve(process.cwd(), '.env.local') })
 
-import { storeDocument } from '../features/rag-chat/services/vector-service'
+// Verify environment variables are loaded
+if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY || !process.env.OPENAI_API_KEY) {
+  console.error('❌ Missing environment variables!')
+  console.error('Make sure .env.local contains:')
+  console.error('- NEXT_PUBLIC_SUPABASE_URL')
+  console.error('- SUPABASE_SERVICE_ROLE_KEY')
+  console.error('- OPENAI_API_KEY')
+  process.exit(1)
+}
+
+console.log('✅ Environment variables loaded successfully\n')
 
 // Demo documents for RAG Challenge
 const SEED_DOCUMENTS = [
@@ -103,6 +112,9 @@ const SEED_DOCUMENTS = [
 
 async function seedKnowledgeBase() {
   console.log('🌱 Starting knowledge base seeding...\n')
+
+  // Dynamic import after env is loaded
+  const { storeDocument } = await import('../features/rag-chat/services/vector-service')
 
   let successCount = 0
   let errorCount = 0

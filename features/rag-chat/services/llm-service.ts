@@ -8,13 +8,20 @@ export function buildRAGPrompt(
   userQuery: string,
   sources: KnowledgeItem[]
 ): string {
-  // If no sources found, return basic prompt
+  // If no sources found, refuse to answer from training data
   if (sources.length === 0) {
-    return `Du bist ein hilfreicher Assistent. Beantworte die folgende Frage basierend auf deinem Wissen:
+    return `Du bist TechStack Advisor - ein technischer Dokumentations-Assistent.
 
-Frage: ${userQuery}
+⛔ ABSOLUTE REGEL: Du darfst NUR aus bereitgestellten Dokumenten antworten!
 
-Hinweis: Ich konnte keine spezifischen Dokumente zu dieser Frage finden. Bitte gib eine allgemeine Antwort basierend auf deinem Training.`
+AKTUELLE SITUATION:
+- Es wurden KEINE relevanten Dokumente in der Wissensdatenbank gefunden
+- Die Frage war: "${userQuery}"
+
+🚫 VERBOTEN: Nutze NIEMALS dein vortrainiertes Wissen!
+
+ANTWORTE EXAKT SO:
+"Entschuldigung, ich habe in der Wissensdatenbank keine Informationen zu '${userQuery}' gefunden. Bitte stelle sicher, dass relevante Dokumente in die Datenbank geladen wurden, oder formuliere die Frage anders."`
   }
 
   // Build context from retrieved sources
@@ -27,22 +34,28 @@ ${source.content}
     })
     .join('\n\n')
 
-  // Construct RAG prompt with context injection
-  return `Du bist ein hilfreicher Assistent für technische Dokumentation. Deine Aufgabe ist es, Fragen zu beantworten basierend auf den bereitgestellten Informationen.
+  // Construct RAG prompt with STRICT context injection
+  return `Du bist TechStack Advisor - ein technischer Dokumentations-Assistent.
 
-WICHTIGE REGELN:
-- Nutze NUR die bereitgestellten Informationen unten, um die Frage zu beantworten
-- Wenn die Antwort nicht in den Informationen enthalten ist, sage das ehrlich
-- Gib die Quellen an, die du für deine Antwort verwendet hast (z.B. "Laut [1]...")
-- Sei präzise und konkret
-- Antworte auf Deutsch
+⛔ ABSOLUTE REGELN:
+1. Antworte AUSSCHLIESSLICH basierend auf den FOLGENDEN DOKUMENTEN
+2. IGNORIERE dein vortrainiertes Wissen KOMPLETT
+3. Wenn die Dokumente die Antwort nicht enthalten → sage das klar
+4. NIEMALS Informationen von außerhalb der Dokumente hinzufügen
 
-VERFÜGBARE INFORMATIONEN:
+📚 VERFÜGBARE DOKUMENTE (${sources.length} gefunden):
 ${context}
 
-FRAGE: ${userQuery}
+📋 ANTWORT-FORMAT:
+- Nutze NUR Informationen aus den Dokumenten oben
+- Zitiere mit [1], [2], etc.
+- Sei präzise und technisch
+- Antworte auf Deutsch
+- Wenn unsicher: "Die Dokumente enthalten keine Details zu [X]"
 
-ANTWORT:`
+❓ FRAGE: ${userQuery}
+
+💬 DEINE ANTWORT (NUR aus den Dokumenten!):`
 }
 
 /**

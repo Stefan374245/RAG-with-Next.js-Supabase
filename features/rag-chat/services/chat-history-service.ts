@@ -81,26 +81,26 @@ export class ChatHistoryService {
 
       if (error) throw error
 
-      // Group by session_id and get first message of each
-      const sessionsMap = new Map<string, ChatSession>()
+      // Group by session_id and get the latest message for each
+      const sessionMap = new Map<string, ChatSession>()
       
-      data?.forEach((row) => {
-        if (!sessionsMap.has(row.session_id)) {
-          sessionsMap.set(row.session_id, {
+      data?.forEach((row: any) => {
+        if (!sessionMap.has(row.session_id)) {
+          sessionMap.set(row.session_id, {
             session_id: row.session_id,
-            last_message: row.message,
+            last_message: row.message.substring(0, 50) + '...',
             created_at: row.created_at,
-            message_count: 1,
+            message_count: 1
           })
         } else {
-          const session = sessionsMap.get(row.session_id)!
+          const session = sessionMap.get(row.session_id)!
           session.message_count++
         }
       })
 
-      return Array.from(sessionsMap.values())
+      return Array.from(sessionMap.values())
     } catch (error) {
-      console.error('Error loading sessions:', error)
+      console.error('Error getting sessions:', error)
       return []
     }
   }

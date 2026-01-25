@@ -28,6 +28,10 @@ export function ChatWindow() {
 
   const { messages, append, isLoading, error, setMessages } = useChat({
     api: '/api/chat',
+    onResponse: (response) => {
+      console.log('🔍 Chat response received:', response.status)
+      console.log('📚 Check /api/test-rag?q=your-query to verify RAG is working')
+    },
     onFinish: async (message) => {
       // Extract sources from message annotations if available
       try {
@@ -81,7 +85,9 @@ export function ChatWindow() {
           </div>
           <div>
             <h2 className="text-lg font-semibold text-white">RAG Assistant</h2>
-            <p className="text-xs text-gray-400 font-light">Powered by React 19 & Next.js 15</p>
+            <p className="text-xs text-gray-400 font-light">
+              ✅ RAG Active | 21 Docs | Threshold: 30%
+            </p>
           </div>
         </div>
 
@@ -94,11 +100,11 @@ export function ChatWindow() {
                   <Bot className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-lg font-semibold text-white mb-2">
-                  Willkommen beim RAG Assistant
-                </h3>
-                <p className="text-sm text-gray-400 max-w-md font-light">
-                  Stelle Fragen über React, Next.js, RAG-Systeme oder die Vercel AI SDK.
-                  Das System durchsucht die Wissensdatenbank semantisch.
+                Welcome to TechStack Advisor 💻
+              </h3>
+              <p className="text-sm text-gray-400 max-w-md font-light">
+                Ask questions about JavaScript, Angular, React, Next.js, or any web development topic.
+                The system searches through comprehensive developer documentation.
                 </p>
               </div>
             </div>

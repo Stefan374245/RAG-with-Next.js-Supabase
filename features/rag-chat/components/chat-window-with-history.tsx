@@ -159,11 +159,11 @@ export function ChatWindowWithHistory() {
                     <Bot className="w-8 h-8 text-white" />
                   </div>
                   <h3 className="text-lg font-semibold text-white mb-2">
-                    Willkommen beim RAG Assistant
-                  </h3>
-                  <p className="text-sm text-gray-400 max-w-md font-light">
-                    Stelle Fragen über React, Next.js, RAG-Systeme oder die Vercel AI SDK.
-                    Das System durchsucht die Wissensdatenbank semantisch.
+                  Welcome to TechStack Advisor 💻
+                </h3>
+                <p className="text-sm text-gray-400 max-w-md font-light">
+                  Ask questions about JavaScript, Angular, React, Next.js, or any web development topic.
+                  The system searches through comprehensive developer documentation.
                   </p>
                 </div>
               </div>

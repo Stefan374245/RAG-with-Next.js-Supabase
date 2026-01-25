@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 
@@ -13,7 +13,11 @@ export const metadata: Metadata = {
   description: 'Enterprise RAG System with Retrieval-Augmented Generation, built with Next.js 15, React 19, Vercel AI SDK, and Supabase pgvector',
   keywords: ['RAG', 'Next.js', 'React 19', 'AI', 'Supabase', 'pgvector', 'OpenAI'],
   authors: [{ name: 'RAG Challenge' }],
-  viewport: 'width=device-width, initial-scale=1',
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
   themeColor: '#2563eb',
 }
 

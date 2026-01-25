@@ -1,98 +1,222 @@
-# 🚀 RAG AI System - Next.js 15 & React 19
+# 🤖 TechStack Advisor - Intelligent Developer Documentation Assistant
 
-Advanced Retrieval-Augmented Generation (RAG) System with Full Chat History Management. Built with Next.js 15, React 19, Supabase, and OpenAI.
+> Ein produktionsreifes **Retrieval-Augmented Generation (RAG)** System, das Entwicklern präzise, quellenbasierte Antworten auf technische Fragen liefert.
 
-## 🎯 Project Overview
+[![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-19-blue)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)](https://www.typescriptlang.org/)
+[![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-green)](https://supabase.com/)
+[![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4-purple)](https://openai.com/)
 
-A production-ready RAG system featuring:
-- **Real-time Streaming Chat** - Live AI responses with source citations
-- **Persistent Chat History** - Session management with localStorage fallback
-- **Semantic Vector Search** - Fast similarity search with pgvector
-- **Modern React Architecture** - React 19 + Compiler + Server Components
-- **Clean UI/UX** - Responsive design with dropdown and sidebar history views
+---
 
-## 🏗️ Architektur
+## 📖 Was ist TechStack Advisor?
+
+**TechStack Advisor** ist ein KI-gestützter Assistent, der speziell für Entwickler entwickelt wurde. Statt allgemeines Wissen zu nutzen, durchsucht das System eine **eigene Wissensdatenbank** mit technischer Dokumentation und liefert **präzise, quellenbasierte Antworten**.
+
+### 🎯 Kernfunktionen
+
+✅ **RAG-basierte Antworten** - Nutzt NUR Informationen aus der Wissensdatenbank, kein Halluzinieren  
+✅ **Semantische Suche** - Findet relevante Dokumente durch Vektorähnlichkeit (pgvector)  
+✅ **Live-Streaming** - Antworten werden in Echtzeit gestreamt  
+✅ **Quellenangaben** - Zeigt verwendete Dokumente mit Relevanz-Scores  
+✅ **Chat-Historie** - Alle Gespräche werden gespeichert und können wiederhergestellt werden  
+✅ **Modern Stack** - Next.js 15, React 19, TypeScript, Supabase, OpenAI  
+
+---
+
+## 🚀 Wie funktioniert es?
+
+### RAG-Pipeline in 3 Schritten
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│  Next.js 15 Frontend (React 19 + Compiler)              │
-│  - Server Components                                    │
-│  - Client Components mit useChat Hook                   │
-│  - Server Actions für Ingestion                         │
-└─────────────────────────────────────────────────────────┘
-                          │
-                          │ HTTP / Streaming
-                          ↓
-┌─────────────────────────────────────────────────────────┐
-│  API Routes (Edge Runtime)                              │
-│  /api/chat - RAG Orchestration + LLM Streaming          │
-└─────────────────────────────────────────────────────────┘
-                          │
-                          ↓
-┌───────────────────┐   ┌────────────────────────────┐
-│  Supabase         │   │  OpenAI API                │
-│  - Postgres       │   │  - text-embedding-3-small  │
-│  - pgvector       │   │  - gpt-4-turbo             │
-│  - RPC Functions  │   └────────────────────────────┘
-└───────────────────┘
+┌─────────────────────────────────────────────────────────────────┐
+│  1. RETRIEVAL (Abrufen)                                         │
+│  ─────────────────────────────────────────────────────────────  │
+│  User-Frage → Embedding generieren → Vector Search              │
+│  "Erkläre mir Angular" → [0.032, -0.009, ...] → Top 5 Docs     │
+└─────────────────────────────────────────────────────────────────┘
+                            │
+                            ↓
+┌─────────────────────────────────────────────────────────────────┐
+│  2. AUGMENTATION (Anreichern)                                   │
+│  ─────────────────────────────────────────────────────────────  │
+│  Gefundene Dokumente → System-Prompt injizieren                 │
+│  [Angular Components, Services...] → Kontext für LLM           │
+└─────────────────────────────────────────────────────────────────┘
+                            │
+                            ↓
+┌─────────────────────────────────────────────────────────────────┐
+│  3. GENERATION (Generieren)                                     │
+│  ─────────────────────────────────────────────────────────────  │
+│  Angereicherter Prompt → GPT-4 → Streaming Response             │
+│  System + User Query → LLM → "Angular ist..." + Quellen [1][2] │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
-### RAG-Workflow
+### 🔍 Detaillierter Workflow
 
-1. **Retrieval**: User-Query → Embedding-Generierung → Vector-Similarity-Search (Supabase RPC)
-2. **Augmentation**: Top-5-Dokumente → System-Prompt-Injection mit Context
-3. **Generation**: Augmented-Prompt → OpenAI GPT-4 → Server-Sent Events (SSE) Streaming
+1. **User stellt Frage:** "Erkläre mir Angular Components"
+   
+2. **Embedding-Generierung:**
+   - OpenAI `text-embedding-3-small` erstellt 1536-dimensionalen Vektor
+   - Query wird in mathematische Repräsentation umgewandelt
+
+3. **Vektor-Suche (Supabase):**
+   - PostgreSQL mit pgvector Extension
+   - HNSW-Index für schnelle Cosine-Similarity-Suche
+   - Top 5 ähnlichste Dokumente werden abgerufen (Threshold: 30%)
+
+4. **Kontext-Injektion:**
+   - Gefundene Dokumente werden in System-Prompt eingefügt
+   - LLM bekommt strikte Anweisung: **"Nutze NUR diese Dokumente!"**
+
+5. **LLM-Generierung:**
+   - GPT-4 Turbo generiert Antwort basierend auf Kontext
+   - Temperature: 0.3 (sehr faktisch, wenig kreativ)
+   - Streaming via Server-Sent Events (SSE)
+
+6. **Response mit Quellen:**
+   - User sieht Antwort + Quellenangaben [1], [2]
+   - Kann Dokumente mit Relevanz-Scores einsehen
+
+---
+
+## 🏗️ System-Architektur
+
+```
+┌────────────────────────────────────────────────────────────────┐
+│                    FRONTEND (React 19)                         │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐        │
+│  │ ChatWindow   │  │ SourceList   │  │ History      │        │
+│  │ (useChat)    │  │ (Citations)  │  │ (Sessions)   │        │
+│  └──────────────┘  └──────────────┘  └──────────────┘        │
+└────────────────────────────────────────────────────────────────┘
+                            │
+                            │ HTTP / SSE
+                            ↓
+┌────────────────────────────────────────────────────────────────┐
+│                  API LAYER (Edge Runtime)                      │
+│  /api/chat          - RAG Orchestration + Streaming            │
+│  /api/db-health     - Database Health Check                    │
+│  /api/test-rag      - Integration Testing                      │
+│  /api/debug-prompt  - Prompt Inspection                        │
+└────────────────────────────────────────────────────────────────┘
+                            │
+                ┌───────────┴────────────┐
+                ↓                        ↓
+┌──────────────────────────┐   ┌──────────────────────┐
+│   SUPABASE POSTGRES      │   │   OPENAI API         │
+│   ├── knowledge_base     │   │   ├── Embeddings     │
+│   │   ├── title         │   │   │   (1536-dim)      │
+│   │   ├── content       │   │   └── GPT-4 Turbo    │
+│   │   ├── embedding     │   │       (streaming)     │
+│   │   └── metadata      │   └──────────────────────┘
+│   ├── chat_history      │
+│   └── pgvector + HNSW   │
+└──────────────────────────┘
+```
+
+### 📦 Service Layer (Clean Architecture)
+
+```typescript
+features/rag-chat/services/
+├── vector-service.ts       // Embedding + Vector Search
+│   ├── generateEmbedding()
+│   ├── searchKnowledge()
+│   └── storeDocument()
+│
+├── llm-service.ts          // Prompt Engineering
+│   └── buildRAGPrompt()    // Strenges RAG-Prompt Template
+│
+└── chat-history-service.ts // Session Management
+    ├── saveMessage()
+    ├── loadSession()
+    └── getAllSessions()
+```
+
+---
 
 ## 🛠️ Tech Stack
 
-- **Framework**: Next.js 15 (App Router, React 19, React Compiler)
-- **AI SDK**: Vercel AI SDK 3.0+ (`streamText`, `useChat`)
-- **Database**: Supabase Postgres + pgvector
-- **LLM**: OpenAI (Embeddings + Chat)
-- **Styling**: Tailwind CSS + lucide-react
-- **Type-Safety**: TypeScript (Strict Mode, kein `any`)
+### Core Framework
+- **Next.js 15** - App Router, React Server Components, Edge Runtime
+- **React 19** - React Compiler für Auto-Memoization
+- **TypeScript 5** - Strict Mode, vollständige Type Safety
 
-## 📦 Project Structure (Feature-Based Architecture)
+### AI & Vector Search
+- **OpenAI API** - `text-embedding-3-small` (Embeddings), `gpt-4-turbo` (Chat)
+- **Vercel AI SDK 3.0** - `streamText()`, `useChat()` Hook
+- **Supabase** - PostgreSQL + pgvector Extension für Vector Search
+- **HNSW Index** - Hierarchical Navigable Small World für schnelle Similarity Search
+
+### Styling & UI
+- **Tailwind CSS** - Utility-First Styling
+- **Lucide React** - Icon Library
+- **Custom Animations** - Fade-in, Slide-in, Glow Effects
+
+### Development
+- **ESLint** - Code Linting
+- **TypeScript Strict** - Keine `any` Types
+- **Centralized Logger** - Strukturiertes Logging mit Context
+
+---
+
+## 📁 Projekt-Struktur (Feature-Based Architecture)
 
 ```
 /
 ├── app/
-│   ├── api/chat/route.ts          # 🔥 Streaming RAG endpoint
+│   ├── api/
+│   │   ├── chat/route.ts              # 🔥 Main RAG Endpoint
+│   │   ├── db-health/route.ts         # Database Health Check
+│   │   ├── test-rag/route.ts          # RAG Testing Endpoint
+│   │   └── debug-prompt/route.ts      # Prompt Debugging
 │   ├── actions/
-│   │   ├── ingest.action.ts       # Document ingestion
-│   │   └── seed.action.ts         # Knowledge base seeding
-│   ├── admin/page.tsx             # Admin panel
-│   ├── layout.tsx
-│   └── page.tsx
-├── features/rag-chat/              # Main RAG feature module
+│   │   ├── ingest.action.ts           # Document Ingestion
+│   │   └── seed.action.ts             # Knowledge Base Seeding
+│   ├── admin/page.tsx                 # Admin Panel
+│   ├── layout.tsx                     # Root Layout
+│   └── page.tsx                       # Landing Page
+│
+├── features/rag-chat/                 # 🎯 Main RAG Feature
 │   ├── components/
-│   │   ├── chat-window-with-history.tsx   # Main chat component
-│   │   ├── chat-history-dropdown.tsx      # Header history dropdown
-│   │   ├── chat-history-sidebar.tsx       # Sidebar history view
-│   │   ├── compact-sidebar.tsx            # Mini sidebar navigation
-│   │   ├── system-info-overlay.tsx        # System info modal
-│   │   ├── chat-input.tsx                 # Message input
-│   │   ├── message-bubble.tsx             # Chat messages
-│   │   └── source-list.tsx                # Source citations
+│   │   ├── chat-window.tsx            # Main Chat Interface
+│   │   ├── chat-history-dropdown.tsx  # History Dropdown
+│   │   ├── chat-history-sidebar.tsx   # Full History View
+│   │   ├── message-bubble.tsx         # Message Display
+│   │   ├── source-list.tsx            # Citation Display
+│   │   ├── chat-input.tsx             # User Input
+│   │   └── system-info-overlay.tsx    # System Info Modal
 │   ├── services/
-│   │   ├── chat-history-service.ts        # 🔥 History management
-│   │   ├── vector-service.ts              # Vector search
-│   │   └── llm-service.ts                 # LLM orchestration
-│   └── types.ts
-├── components/ui/                  # Reusable UI components
-├── lib/                            # Shared utilities
-│   ├── supabase.ts
-│   ├── openai.ts
-│   └── utils.ts
-└── supabase/
-    ├── migrations/
-    │   └── 20260124_init_schema.sql
-    └── seed.sql
+│   │   ├── vector-service.ts          # 🔥 Vector Operations
+│   │   ├── llm-service.ts             # 🔥 Prompt Engineering
+│   │   └── chat-history-service.ts    # History Management
+│   └── types.ts                       # Feature Types
+│
+├── lib/
+│   ├── supabase.ts                    # Supabase Client
+│   ├── openai.ts                      # OpenAI Configuration
+│   ├── constants.ts                   # App Configuration
+│   ├── logger.ts                      # 🆕 Centralized Logging
+│   └── utils.ts                       # Utilities
+│
+├── types/
+│   └── index.ts                       # Global Type Definitions
+│
+├── supabase/
+│   └── migrations/
+│       └── 20260124_init_schema.sql   # Database Schema
+│
+└── scripts/
+    └── seed-knowledge.ts              # Knowledge Base Seeding
 ```
 
-## 🚀 Setup & Installation
+---
 
-### 1. Projekt klonen
+## ⚡ Quick Start
+
+### 1. Installation
 
 ```bash
 git clone <repo-url>
@@ -100,39 +224,27 @@ cd "RAG AI"
 npm install
 ```
 
-### 2. Supabase Setup
+### 2. Environment Variables
 
-1. Erstelle ein neues Projekt auf [supabase.com](https://supabase.com)
-2. Führe das SQL-Schema aus:
-   ```bash
-   # In Supabase SQL Editor:
-   # Kopiere Inhalt von supabase/migrations/20260124_init_schema.sql
-   ```
-3. Optional: Seed-Daten einspielen (supabase/seed.sql)
-
-### 3. Environment Variables
-
-```bash
-cp .env.local.example .env.local
-```
-
-Füge deine Keys ein:
+Erstelle `.env.local`:
 
 ```env
 # Supabase
-NEXT_PUBLIC_SUPABASE_URL=https://xxx.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJxxx...
-SUPABASE_SERVICE_ROLE_KEY=eyJxxx...
+NEXT_PUBLIC_SUPABASE_URL=https://xxxxx.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGci...
+SUPABASE_SERVICE_ROLE_KEY=eyJhbGci...
 
 # OpenAI
-OPENAI_API_KEY=sk-xxx...
+OPENAI_API_KEY=sk-proj-...
 ```
 
-**Keys finden:**
-- Supabase: Project Settings → API → URL + anon key + service_role key
-- OpenAI: [platform.openai.com/api-keys](https://platform.openai.com/api-keys)
+### 3. Datenbank Setup
 
-### 4. Entwicklungsserver starten
+1. Erstelle Supabase Projekt auf [supabase.com](https://supabase.com)
+2. Führe Migration aus: `supabase/migrations/20260124_init_schema.sql`
+3. Optional: Seed-Daten laden (siehe Admin Panel)
+
+### 4. Starten
 
 ```bash
 npm run dev
@@ -140,293 +252,364 @@ npm run dev
 
 Öffne [http://localhost:3000](http://localhost:3000)
 
-## 🎨 Features
+---
 
-### ✅ Core RAG System
+## 🎨 Features im Detail
 
-- **Semantic Search**: pgvector HNSW-Index for fast cosine similarity search
-- **Real-time Streaming**: LLM responses streamed live via SSE
-- **Source Citations**: Display retrieved documents with relevance scores
-- **Context Injection**: Top-5 documents automatically added to prompts
-- **Error Handling**: Comprehensive error boundaries for robust UX
+### ✅ RAG-System
 
-### 🆕 Chat History Management
+**Warum RAG statt direktes LLM?**
+- ❌ **Standard LLM:** "Angular wurde 2010 von Google veröffentlicht..." (Halluzination möglich)
+- ✅ **RAG System:** "Laut Dokument [1]: Angular Components sind..." (quellenbasiert)
 
-- **Persistent Sessions**: All conversations saved with unique session IDs
-- **Dropdown History**: Quick access to recent chats from header
-- **Sidebar View**: Full history management in dedicated sidebar
-- **Session Switching**: Load any previous conversation with one click
-- **Message Tracking**: Complete message history with timestamps
-- **LocalStorage Fallback**: Works without database for development
-- **Delete Sessions**: Clean up old conversations
+**Vorteile:**
+- Präzise Antworten aus eigener Dokumentation
+- Keine Halluzinationen bei fehlendem Wissen
+- Aktualität durch eigene Datenbank
+- Nachvollziehbarkeit durch Quellenangaben
 
-### 🎯 React 19 & Modern Patterns
+### 🔍 Semantic Search
 
-- **React Compiler**: Auto-memoization for optimal performance
-- **Server Components**: Reduced bundle size and faster initial load
-- **Server Actions**: Type-safe API calls without boilerplate
-- **useChat Hook**: Vercel AI SDK for seamless chat state management
-- **Streaming UI**: Progressive rendering of AI responses
+**Wie funktioniert Vektorsuche?**
 
-### 💅 UI/UX
+```python
+# Traditionelle Keyword-Suche
+Query: "React Komponenten"
+Findet: Nur Dokumente mit exakten Wörtern "React" + "Komponenten"
 
-- **Responsive Design**: Mobile-first with adaptive layouts
-- **Dark Theme Header**: Professional gradient design
-- **Backdrop Modals**: Clean dropdown interactions
-- **Smooth Animations**: Fade-in/slide-in transitions
-- **Loading States**: Spinners and skeleton screens
-- **Compact Sidebar**: Minimal navigation with icons
+# Vektor-Suche (Semantic)
+Query: "React Komponenten"
+Findet auch: "React Components", "Function Components", 
+             "Class Components", "JSX Elements"
+             
+→ Versteht Bedeutung, nicht nur Keywords!
+```
 
-### 📊 Performance
+**Performance:**
+- HNSW-Index: ~100ms für 10.000 Dokumente
+- Cosine Similarity: Mathematische Ähnlichkeitsberechnung
+- Top-K Retrieval: Nur relevanteste Dokumente
 
-- **Vector Search**: < 100ms (5 Results, HNSW Index)
-- **Embedding Generation**: < 200ms (OpenAI API)
-- **Stream-Start**: < 400ms (RAG Pipeline Total)
-- **Lighthouse Score**: 90+ (alle Kategorien)
+### 💬 Chat-Historie
 
-## 🧪 Usage
+**Features:**
+- Alle Gespräche in Datenbank gespeichert
+- Session-basierte Organisation (UUID)
+- Dropdown für schnellen Zugriff
+- Sidebar für vollständige Historie
+- Löschen einzelner Sessions möglich
 
-### Main Chat Interface
-
-1. **Ask Questions**: Type your question about React, Next.js, or RAG systems
-2. **Semantic Search**: System searches knowledge base using vector similarity
-3. **Context Injection**: Top-5 relevant documents added to prompt
-4. **Live Streaming**: GPT-4 response streams in real-time
-5. **View Sources**: See which documents were used with relevance scores
-
-### Chat History Management
-
-**Via Dropdown (Header)**:
-- Click "Verlauf" button in header
-- See all previous chat sessions
-- Click any session to load it
-- Click "Neuer Chat" to start fresh
-- Delete icon to remove sessions
-
-**Via Sidebar**:
-- Open sidebar from compact navigation
-- Browse full chat history
-- Load or delete sessions
-- See message counts and timestamps
-
-### System Info
-
-- Click info icon in compact sidebar
-- View system architecture
-- See tech stack details
-- Understand RAG workflow
-
-### Adding Documents (Admin)
-
-Navigate to `/admin` to seed the knowledge base with default documents, or use the Server Action:
-
+**Technische Details:**
 ```typescript
-import { ingestDocument } from '@/app/actions/ingest.action'
+// Session-Struktur
+interface ChatSession {
+  session_id: string          // UUID
+  last_message: string        // Preview
+  created_at: string          // Timestamp
+  message_count: number       // Anzahl Nachrichten
+}
 
-await ingestDocument(
-  'Document Title',
-  'Long document content here...',
-  { category: 'docs', source: 'manual' }
-)
+// Message-Struktur
+interface ChatMessage {
+  id: string
+  session_id: string
+  message: string
+  role: 'user' | 'assistant'
+  sources?: KnowledgeItem[]
+  created_at: string
+}
 ```
 
-The system automatically:
-1. Chunks text (512 chars, 50 overlap)
-2. Generates embeddings for each chunk
-3. Stores in Supabase with pgvector
-
-## 🏛️ Design Decisions
-
-### 1. Chat History Architecture
-
-**Dual Storage Strategy:**
-- **Primary**: Supabase for production persistence
-- **Fallback**: localStorage for development/offline mode
-- **Service Pattern**: `ChatHistoryService` abstracts storage layer
-
-**Why this approach?**
-- Zero-config development experience
-- Graceful degradation without database
-- Easy to extend with additional storage backends
-- Type-safe interfaces throughout
-
-### 2. Vercel AI SDK vs Direct OpenAI
-
-- **Streaming Abstraction**: `streamText()` handles SSE complexity automatically
-- **Provider Agnostic**: Switch to Anthropic/Cohere without frontend changes
-- **React Integration**: `useChat()` hook provides state management out-of-the-box
-- **Better DX**: Simplified error handling and retry logic
-
-### 3. Feature-Based Architecture
-
-- **Scalability**: Each feature is isolated (e.g., `rag-chat` could become npm package)
-- **Co-Location**: Services, components, and types live together
-- **Clear Boundaries**: Easy to understand and maintain
-- **Team-Friendly**: Multiple developers can work on different features
-
-### 4. Dropdown vs Sidebar History
-
-**Both Included Because:**
-- **Dropdown**: Quick access without leaving chat (desktop workflow)
-- **Sidebar**: Full history management for power users
-- **Mobile-First**: Dropdown works better on small screens
-- **Flexibility**: Users choose their preferred workflow
-
-### 5. Session Management
-
-**Why Session IDs?**
-- Enable chat history without user authentication
-- Simple UUID-based identification
-- Easy to extend with user accounts later
-- Works offline with localStorage
-
-### 6. Event Handling Solution
-
-**Problem**: Nested buttons or click propagation issues
-**Solution**: 
-- Backdrop overlay with z-index layering
-- Proper event stopping in delete buttons
-- onMouseDown for better responsiveness
-- Data attributes for selective event handling
-
-## 🚢 Deployment
-
-### Vercel (Empfohlen)
+### 📊 Debug-Endpunkte
 
 ```bash
-# Push zu Git
-git push origin main
+# 1. RAG-Pipeline testen
+GET /api/test-rag?q=Angular
+→ Zeigt Embeddings, RPC-Call, gefundene Dokumente
 
-# In Vercel:
-# 1. Import Repository
-# 2. Environment-Variables setzen (siehe .env.local.example)
-# 3. Deploy
+# 2. Prompt inspizieren
+GET /api/debug-prompt?q=React
+→ Zeigt exakten System-Prompt den das LLM erhält
+
+# 3. Datenbank-Status
+GET /api/db-health
+→ Prüft Tabellen, Embeddings, RPC-Funktionen
 ```
-
-**Wichtig**: Edge Runtime für `/api/chat` benötigt Vercel Pro oder höher bei großem Traffic.
-
-### Alternative: Selbst-Hosting
-
-```bash
-npm run build
-npm start
-```
-
-Requirements:
-- Node.js 20+
-- Environment-Variables gesetzt
-- Supabase-Zugriff
-
-## 📝 Development Timeline
-
-### Phase 1: Foundation (Completed)
-- ✅ Next.js 15 + React 19 setup
-- ✅ Supabase integration with pgvector
-- ✅ OpenAI embeddings and chat
-- ✅ Basic RAG pipeline
-
-### Phase 2: Core Features (Completed)
-- ✅ Streaming chat interface
-- ✅ Vector search implementation
-- ✅ Source citations
-- ✅ Server Actions for document ingestion
-- ✅ Admin panel for seeding
-
-### Phase 3: History Management (Completed)
-- ✅ Chat history service with dual storage
-- ✅ Session management system
-- ✅ History dropdown component
-- ✅ Full sidebar history view
-- ✅ Session loading and deletion
-- ✅ Timestamp and message tracking
-
-### Phase 4: Polish & UX (Completed)
-- ✅ Responsive design improvements
-- ✅ System info overlay
-- ✅ Compact sidebar navigation
-- ✅ Error boundary components
-- ✅ Loading states and animations
-- ✅ Fixed event handling issues
-- ✅ Optimized state synchronization
-
-**Total Development Time**: ~6-8 hours
-
-## 🐛 Troubleshooting
-
-### Chat History Issues
-
-**Sessions not loading:**
-- Check browser console for errors
-- Verify Supabase connection (falls back to localStorage)
-- Try clearing localStorage: `localStorage.clear()` in console
-
-**Dropdown not closing on click:**
-- This was a known issue - now fixed with backdrop overlay
-- Ensure you're on latest version
-
-**Messages not displaying after load:**
-- Fixed with proper state synchronization
-- Uses `requestAnimationFrame` for UI updates
-
-### General Issues
-
-**"Missing Supabase environment variables"**
-- Ensure `.env.local` exists with all required keys
-- No spaces or quotes around values
-- Restart dev server after changes
-
-**"Failed to generate embedding"**
-- Verify OpenAI API key is valid
-- Check quota limits at [platform.openai.com/usage](https://platform.openai.com/usage)
-- Ensure billing is set up on OpenAI account
-
-**"Supabase RPC error"**
-- Confirm SQL migration was executed
-- Verify pgvector extension: `CREATE EXTENSION vector`
-- Check Supabase logs in dashboard
-
-**"Chat doesn't stream"**
-- Edge Runtime works better in production
-- For local dev: `npm run build && npm start`
-- Check network tab for SSE connection
-
-## 📚 Weitere Ressourcen
-
-- [Next.js 15 Docs](https://nextjs.org/docs)
-- [Vercel AI SDK](https://sdk.vercel.ai/docs)
-- [Supabase Vector Guide](https://supabase.com/docs/guides/ai)
-- [React 19 Release Notes](https://react.dev/blog/2024/12/05/react-19)
-
-## 🙏 Acknowledgments
-
-- **Vercel** für AI SDK und Hosting-Plattform
-- **Supabase** für Postgres + pgvector
-- **OpenAI** für Embeddings und GPT-4
-- **React Team** für React 19 und Compiler
-
-## 🚀 Future Enhancements
-
-### Planned Features
-
-- [ ] **User Authentication**: Multi-user support with Supabase Auth
-- [ ] **Shared Sessions**: Share chat links with others
-- [ ] **Export Chats**: Download conversations as PDF/Markdown
-- [ ] **Advanced Search**: Full-text search across chat history
-- [ ] **Chat Folders**: Organize conversations by topic
-- [ ] **Collaborative Editing**: Multiple users in same session
-- [ ] **Voice Input**: Speech-to-text integration
-- [ ] **Custom Models**: Support for different LLM providers
-- [ ] **Analytics Dashboard**: Usage statistics and insights
-- [ ] **API Access**: RESTful API for programmatic access
-
-### Performance Optimizations
-
-- [ ] Implement chat pagination for large histories
-- [ ] Add Redis caching for frequent queries
-- [ ] Optimize vector search with better indexing
-- [ ] Implement message chunking for long conversations
-- [ ] Add background workers for embedding generation
 
 ---
 
-**Built with ❤️ as a showcase of modern RAG architecture**
+## 🚀 Deployment
+
+### Vercel (Empfohlen)
+
+**1. Repository verbinden**
+```bash
+git push origin main
+```
+
+**2. In Vercel:**
+- Import Repository
+- Framework: Next.js (auto-detected)
+- Root Directory: `.`
+
+**3. Environment Variables setzen:**
+
+Alle Variablen aus `.env.local` in Vercel Project Settings → Environment Variables übertragen.
+
+**4. Deploy:**
+- Click "Deploy"
+- Vercel erstellt automatisch URL: `https://xxx.vercel.app`
+
+### ✅ Production Checklist
+
+- [x] Environment Variables gesetzt
+- [x] Supabase Projekt produktionsbereit
+- [x] OpenAI API-Key mit ausreichend Credits
+- [x] Knowledge Base mit Dokumenten gefüllt
+- [x] Build lokal getestet (`npm run build`)
+- [x] CORS/Headers konfiguriert (falls nötig)
+
+### 📊 Monitoring
+
+Nach Deployment prüfen:
+- Vercel Analytics aktiviert
+- Error Tracking (Sentry optional)
+- Database Metrics in Supabase
+- OpenAI Usage Dashboard
+
+**Logs ansehen:**
+```
+Vercel Dashboard → Deployments → [Latest] → Runtime Logs
+```
+
+---
+
+## 🔧 Configuration
+
+### RAG-Parameter anpassen
+
+`lib/constants.ts`:
+
+```typescript
+export const APP_CONFIG = {
+  // Ähnlichkeits-Schwellenwert (höher = strenger)
+  MATCH_THRESHOLD: 0.3,    // 30% Minimum
+  
+  // Anzahl Dokumente pro Query
+  MATCH_COUNT: 5,          // Top 5
+  
+  // LLM Temperature (0 = faktisch, 1 = kreativ)
+  TEMPERATURE: 0.3,        // Sehr faktisch
+  
+  // Max Response Länge
+  MAX_TOKENS: 1000,
+  
+  // Document Chunking
+  CHUNK_SIZE: 512,         // Token pro Chunk
+  CHUNK_OVERLAP: 50,       // Overlap für Kontext
+}
+```
+
+### Prompt-Engineering
+
+`features/rag-chat/services/llm-service.ts`:
+
+```typescript
+// Verschärfung des Prompts
+return `Du bist TechStack Advisor.
+
+⛔ ABSOLUTE REGELN:
+1. Nutze AUSSCHLIESSLICH die folgenden Dokumente
+2. IGNORIERE dein vortrainiertes Wissen
+3. Bei fehlenden Infos: Sage das klar
+
+📚 DOKUMENTE:
+${context}
+
+❓ FRAGE: ${userQuery}
+💬 ANTWORT (NUR aus den Dokumenten!):`
+```
+
+---
+
+## 🧪 Testing
+
+### Unit Tests (Empfohlen)
+
+```bash
+npm install -D vitest @testing-library/react
+```
+
+```typescript
+// vector-service.test.ts
+describe('generateEmbedding', () => {
+  it('should return 1536-dimensional vector', async () => {
+    const embedding = await generateEmbedding('test')
+    expect(embedding).toHaveLength(1536)
+  })
+})
+```
+
+### Integration Tests
+
+```bash
+# RAG-Pipeline Ende-zu-Ende
+curl http://localhost:3000/api/test-rag?q=React
+
+# Database Health
+curl http://localhost:3000/api/db-health
+
+# Prompt Inspection
+curl http://localhost:3000/api/debug-prompt?q=Angular
+```
+
+### E2E Tests (Playwright)
+
+```bash
+npm install -D @playwright/test
+```
+
+```typescript
+test('RAG workflow', async ({ page }) => {
+  await page.goto('http://localhost:3000')
+  await page.fill('textarea', 'Erkläre mir React')
+  await page.click('button[type="submit"]')
+  await expect(page.locator('.message-bubble')).toContainText('React')
+  await expect(page.locator('.source-list')).toBeVisible()
+})
+```
+
+---
+
+## 🐛 Troubleshooting
+
+### Häufige Probleme
+
+**1. "No sources found"**
+```bash
+# Prüfen ob Dokumente vorhanden
+curl http://localhost:3000/api/db-health
+
+# Threshold zu hoch?
+# → In constants.ts MATCH_THRESHOLD von 0.3 auf 0.2 senken
+```
+
+**2. "Supabase RPC error"**
+```sql
+-- In Supabase SQL Editor prüfen:
+SELECT * FROM knowledge_base LIMIT 1;
+
+-- Extension installiert?
+CREATE EXTENSION IF NOT EXISTS vector;
+```
+
+**3. "Streaming doesn't work"**
+```bash
+# Edge Runtime Problem?
+# → npm run build && npm start (Production Mode testen)
+
+# Network Tab prüfen: SSE-Verbindung sichtbar?
+```
+
+**4. "Chat History not saving"**
+```typescript
+// Browser Console:
+localStorage.getItem('chat-sessions')
+// → Sollte JSON mit Sessions zeigen
+
+// Supabase prüfen:
+SELECT * FROM chat_history ORDER BY created_at DESC LIMIT 10;
+```
+
+---
+
+## 📚 Weiterführende Ressourcen
+
+### Dokumentation
+- [RAG Best Practices](https://www.anthropic.com/index/retrieval-augmented-generation)
+- [pgvector Guide](https://github.com/pgvector/pgvector)
+- [Vercel AI SDK Docs](https://sdk.vercel.ai/docs)
+- [Next.js 15 Documentation](https://nextjs.org/docs)
+
+### Tutorials
+- [Building Production RAG](https://www.pinecone.io/learn/retrieval-augmented-generation/)
+- [Vector Search Explained](https://www.youtube.com/watch?v=klTvEwg3oJ4)
+- [React 19 Features](https://react.dev/blog/2024/12/05/react-19)
+
+---
+
+## 🎯 Best Practices
+
+### Clean Code
+✅ Feature-based Architecture  
+✅ Service Layer Pattern  
+✅ Centralized Logging  
+✅ Type Safety (no `any`)  
+✅ Error Boundaries  
+
+### Performance
+✅ React Compiler (Auto-Memoization)  
+✅ Server Components  
+✅ Edge Runtime  
+✅ Vector Indexing (HNSW)  
+✅ Streaming Responses  
+
+### Security
+✅ Environment Variables  
+✅ Input Validation  
+✅ Error Message Sanitization  
+✅ Rate Limiting (TODO)  
+✅ Authentication (TODO)  
+
+---
+
+## 🚀 Roadmap
+
+### v2.0 (Planned)
+- [ ] Multi-User Support (Supabase Auth)
+- [ ] Advanced Analytics Dashboard
+- [ ] Document Upload via UI
+- [ ] Custom Embedding Models
+- [ ] Hybrid Search (Vector + Keyword)
+- [ ] Chat Export (PDF/Markdown)
+- [ ] API Authentication
+- [ ] Rate Limiting
+- [ ] Caching Layer (Redis)
+
+### v3.0 (Future)
+- [ ] Multi-Language Support
+- [ ] Voice Input/Output
+- [ ] Collaborative Chats
+- [ ] Plugin System
+- [ ] Mobile App
+
+---
+
+## 📄 License
+
+MIT License - siehe [LICENSE](LICENSE)
+
+---
+
+## 🙏 Acknowledgments
+
+Dieses Projekt wurde entwickelt mit:
+- **Vercel** - AI SDK & Hosting
+- **Supabase** - PostgreSQL + pgvector
+- **OpenAI** - GPT-4 & Embeddings
+- **React Team** - React 19 & Compiler
+
+---
+
+## 📧 Support
+
+Bei Fragen oder Problemen:
+- 📖 Lies die [Dokumentation](#-wie-funktioniert-es)
+- 🐛 Check [Troubleshooting](#-troubleshooting)
+- 💬 Öffne ein Issue auf GitHub
+
+---
+
+**Built with ❤️ for Developers**
+
+⭐ **Star this repo** if you find it helpful!

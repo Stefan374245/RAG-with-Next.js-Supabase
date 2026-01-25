@@ -2,6 +2,7 @@ import { streamText } from 'ai'
 import { chatModel } from '../../../lib/openai'
 import { searchKnowledge } from '../../../features/rag-chat/services/vector-service'
 import { buildRAGPrompt } from '../../../features/rag-chat/services/llm-service'
+import { logger } from '../../../lib/logger'
 
 export const runtime = 'edge'
 
@@ -29,10 +30,18 @@ export async function POST(req: Request) {
       return new Response('Empty message', { status: 400 })
     }
 
+    logger.ragQuery(userMessage, 0)
+
     // Step 1: Retrieval - Semantic search for relevant knowledge
     const sources = await searchKnowledge(userMessage)
+    
+    if (sources.length === 0) {
+      logger.warn('No sources found for query',
+        { module: 'ChatAPI', metadata: { query: userMessage.substring(0, 50) }}
+      )
+    }
 
-    // Step 2: Augmentation - Build prompt with retrieved context
+    // Step 2: Augmentation - Build prompt with retrieved context  
     const systemPrompt = buildRAGPrompt(userMessage, sources)
 
     // Step 3: Generation - Stream LLM response
@@ -45,15 +54,22 @@ export async function POST(req: Request) {
           content: userMessage,
         },
       ],
-      temperature: 0.7,
+      temperature: 0.3, // Lower temperature for more factual responses
       maxTokens: 1000,
     })
 
-    // Return streaming response
-    // The Vercel AI SDK automatically handles SSE formatting
-    return result.toDataStreamResponse()
+    // Add sources metadata to response
+    const response = result.toDataStreamResponse()
+    
+    // Add custom header with source count for debugging
+    response.headers.set('X-RAG-Sources', sources.length.toString())
+    
+    return response
   } catch (error) {
-    console.error('Chat API error:', error)
+    logger.error('Chat API request failed',
+      { module: 'ChatAPI' },
+      error
+    )
     return new Response(
       JSON.stringify({ 
         error: 'Internal server error',

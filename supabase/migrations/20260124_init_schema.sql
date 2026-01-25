@@ -54,3 +54,24 @@ BEGIN
   LIMIT match_count;
 END;
 $$;
+
+-- RPC Function: Insert document with proper vector type
+CREATE OR REPLACE FUNCTION insert_knowledge(
+  p_title TEXT,
+  p_content TEXT,
+  p_embedding vector(1536),
+  p_metadata JSONB DEFAULT '{}'
+)
+RETURNS UUID
+LANGUAGE plpgsql
+AS $$
+DECLARE
+  new_id UUID;
+BEGIN
+  INSERT INTO knowledge_base (title, content, embedding, metadata)
+  VALUES (p_title, p_content, p_embedding, p_metadata)
+  RETURNING id INTO new_id;
+  
+  RETURN new_id;
+END;
+$$;

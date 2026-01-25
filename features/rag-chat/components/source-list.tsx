@@ -53,7 +53,7 @@ export function SourceList({ sources }: SourceListProps) {
                   </span>
                 </div>
                 <Badge variant="default" className="bg-gradient-primary text-white border-0 shadow-glow-primary">
-                  {(source.similarity * 100).toFixed(0)}% Match
+                  {((source.similarity ?? 0) * 100).toFixed(0)}% Match
                 </Badge>
               </div>
               <p className="text-sm text-gray-400 line-clamp-3 leading-relaxed">

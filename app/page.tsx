@@ -48,16 +48,16 @@ export default function TechStackAdvisorHome() {
           {/* Example Questions - Developer Focus */}
           <div className="flex flex-wrap justify-center gap-2 text-xs px-4">
             <button className="glass px-3 py-1.5 rounded-full hover-lift transition-all hover:bg-blue-500/10 hover:border-blue-400/30 border border-transparent">
-              ⚛️ "Was sind React Hooks und wie benutze ich sie?"
+              ⚛️ &ldquo;Was sind React Hooks und wie benutze ich sie?&rdquo;
             </button>
             <button className="glass px-3 py-1.5 rounded-full hover-lift transition-all hover:bg-violet-500/10 hover:border-violet-400/30 border border-transparent">
-              🔷 "Unterschied zwischen Angular und React?"
+              🔷 &ldquo;Unterschied zwischen Angular und React?&rdquo;
             </button>
             <button className="glass px-3 py-1.5 rounded-full hover-lift transition-all hover:bg-purple-500/10 hover:border-purple-400/30 border border-transparent">
-              ▲ "Next.js Server Components vs Client Components?"
+              ▲ &ldquo;Next.js Server Components vs Client Components?&rdquo;
             </button>
             <button className="glass px-3 py-1.5 rounded-full hover-lift transition-all hover:bg-pink-500/10 hover:border-pink-400/30 border border-transparent">
-              💡 "Erkläre mir JavaScript Closures!"
+              💡 &ldquo;Erkläre mir JavaScript Closures!&rdquo;
             </button>
           </div>
         </div>

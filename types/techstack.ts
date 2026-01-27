@@ -37,6 +37,7 @@ export interface TechStackMetadata {
   slug?: string  // URL-friendly identifier
   author?: string
   difficulty_score?: number  // 1-10
+    [key: string]: string | number | boolean | string[] | undefined;
 }
 
 // ============================================================================

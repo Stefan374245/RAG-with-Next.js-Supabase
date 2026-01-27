@@ -11,6 +11,8 @@ export interface ChatInputProps {
   disabled?: boolean
   isLoading?: boolean
   placeholder?: string
+  value?: string
+  setValue?: (v: string) => void
 }
 
 /**
@@ -22,22 +24,27 @@ export function ChatInput({
   disabled = false,
   isLoading = false,
   placeholder = 'Stelle eine Frage...',
+  value,
+  setValue,
 }: ChatInputProps) {
-  const [input, setInput] = React.useState('')
-  const textareaRef = React.useRef<HTMLTextAreaElement>(null)
+  const isControlled = typeof value === 'string' && typeof setValue === 'function';
+  const [uncontrolledInput, setUncontrolledInput] = React.useState('');
+  const input = isControlled ? value! : uncontrolledInput;
+  const setInput = isControlled ? setValue! : setUncontrolledInput;
+  const textareaRef = React.useRef<HTMLTextAreaElement>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!input.trim() || disabled || isLoading) return
+    e.preventDefault();
+    if (!input.trim() || disabled || isLoading) return;
 
-    onSend(input.trim())
-    setInput('')
+    onSend(input.trim());
+    setInput('');
 
     // Reset textarea height
     if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto'
+      textareaRef.current.style.height = 'auto';
     }
-  }
+  };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {

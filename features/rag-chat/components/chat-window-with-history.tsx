@@ -19,7 +19,13 @@ import { ChatHistoryService } from '../services/chat-history-service'
  * Chat Window with History - Smart Component
  * Combines chat interface with session history sidebar
  */
-export function ChatWindowWithHistory() {
+export function ChatWindowWithHistory({
+  inputValue,
+  setInputValue,
+}: {
+  inputValue?: string;
+  setInputValue?: (v: string) => void;
+}) {
   const messagesEndRef = React.useRef<HTMLDivElement>(null)
   const [sources, setSources] = React.useState<any[]>([])
   const [sessionId, setSessionId] = React.useState<string>('')
@@ -208,6 +214,8 @@ export function ChatWindowWithHistory() {
               onSend={handleSend}
               isLoading={isLoading}
               disabled={!!error}
+              value={inputValue}
+              setValue={setInputValue}
             />
           </div>
         </Card>

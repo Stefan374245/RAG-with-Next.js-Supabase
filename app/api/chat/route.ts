@@ -178,20 +178,6 @@ export async function POST(req: Request) {
 
     // Retrieval using conversation-based query
     const { sources, query } = await retrieveSources(messages);
-
-    // Debug: Wenn keine Quellen gefunden, liefere sie im Body zurück (nur DEV!)
-    if (process.env.NODE_ENV !== "production" && sources.length === 0) {
-      return new Response(
-        JSON.stringify({
-          debug: true,
-          query,
-          sources,
-          message: "Keine Quellen gefunden, obwohl DB-Zugriff erfolgreich war.",
-        }),
-        { status: 200, headers: { "Content-Type": "application/json" } }
-      );
-    }
-
     // Augmentation
     const systemPrompt = buildRAGPrompt(userMessage, sources);
     // Generation (stream) using the full messages array

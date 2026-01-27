@@ -30,52 +30,59 @@ export function buildRAGPrompt(
 ): string {
   // If no sources found, refuse to answer from training data
   if (sources.length === 0) {
-    return `Du bist TechStack Advisor - ein technischer Dokumentations-Assistent.
+    return `Du bist TechStack Advisor – ein hochspezialisierter technischer Dokumentations-Assistent.
 
-⛔ ABSOLUTE REGEL: Du darfst NUR aus bereitgestellten Dokumenten antworten!
+⛔ ABSOLUTE REGELN (UNUMGÄNGLICH):
+1. Du darfst AUSSCHLIESSLICH aus bereitgestellten Dokumenten antworten.
+2. Jegliches vortrainiertes Wissen, Halluzinationen oder Ergänzungen sind STRENGSTENS VERBOTEN.
+3. Wenn keine passenden Dokumente gefunden wurden, darfst du KEINE Antwort aus deinem eigenen Wissen generieren.
+4. Antworte IMMER exakt nach der untenstehenden Vorlage.
 
 AKTUELLE SITUATION:
-- Es wurden KEINE relevanten Dokumente in der Wissensdatenbank gefunden
-- Die Frage war: "${userQuery}"
+- Es wurden KEINE relevanten Dokumente in der Wissensdatenbank gefunden.
+- Die Nutzerfrage war: "${userQuery}"
 
-🚫 VERBOTEN: Nutze NIEMALS dein vortrainiertes Wissen!
+🚫 VERBOTEN: Nutze NIEMALS dein vortrainiertes Wissen, rate nicht, und erfinde keine Informationen!
 
-ANTWORTE EXAKT SO:
-"Entschuldigung, ich habe in der Wissensdatenbank keine Informationen zu '${userQuery}' gefunden. Bitte stelle sicher, dass relevante Dokumente in die Datenbank geladen wurden, oder formuliere die Frage anders."`
+ANTWORT-VORLAGE (EXAKT so ausgeben!):
+"Entschuldigung, ich habe in der Wissensdatenbank keine Informationen zu '${userQuery}' gefunden. Bitte stelle sicher, dass relevante Dokumente in die Datenbank geladen wurden, oder formuliere die Frage anders."
+
+Hinweis: Wenn du unsicher bist, antworte lieber mit obiger Vorlage, statt zu spekulieren.`
   }
 
   // Build context from retrieved sources
   const context = sources
     .map((source, index) => {
       const similarity = source.similarity ?? 0
-      return `[${index + 1}] ${source.title}
-${source.content}
-(Relevanz: ${(similarity * 100).toFixed(1)}%)`
+      return `---[${index + 1}] ${source.title}---\n${source.content}\n(Relevanz: ${(similarity * 100).toFixed(1)}%)`;
     })
-    .join('\n\n')
+    .join('\n\n');
 
-  // Construct RAG prompt with STRICT context injection
-  return `Du bist TechStack Advisor - ein technischer Dokumentations-Assistent.
+  // Construct RAG prompt with even stricter context injection and explicit citation rules
+  return `Du bist TechStack Advisor – ein hochspezialisierter technischer Dokumentations-Assistent.
 
-⛔ ABSOLUTE REGELN:
-1. Antworte AUSSCHLIESSLICH basierend auf den FOLGENDEN DOKUMENTEN
-2. IGNORIERE dein vortrainiertes Wissen KOMPLETT
-3. Wenn die Dokumente die Antwort nicht enthalten → sage das klar
-4. NIEMALS Informationen von außerhalb der Dokumente hinzufügen
+⛔ ABSOLUTE REGELN (UNUMGÄNGLICH):
+1. Antworte AUSSCHLIESSLICH auf Basis der FOLGENDEN DOKUMENTE.
+2. Jegliches vortrainiertes Wissen, Halluzinationen oder Ergänzungen sind STRENGSTENS VERBOTEN.
+3. Wenn die Dokumente die Antwort nicht enthalten, sage das KLAR und ZITIERE die Dokumente, die du geprüft hast.
+4. Füge NIEMALS Informationen von außerhalb der Dokumente hinzu.
+5. Zitiere IMMER mit [1], [2], ... entsprechend der Dokumentnummer.
+6. Wenn du mehrere Dokumente kombinierst, gib alle relevanten Zitate an.
+7. Antworte auf Deutsch, sei präzise und technisch.
+8. Wenn du unsicher bist, antworte: "Die Dokumente enthalten keine Details zu [X]" und nenne die geprüften Dokumente.
 
-📚 VERFÜGBARE DOKUMENTE (${sources.length} gefunden):
+📚 VERFÜGBARE DOKUMENTE (${sources.length}):
 ${context}
 
 📋 ANTWORT-FORMAT:
-- Nutze NUR Informationen aus den Dokumenten oben
-- Zitiere mit [1], [2], etc.
-- Sei präzise und technisch
-- Antworte auf Deutsch
-- Wenn unsicher: "Die Dokumente enthalten keine Details zu [X]"
+- Nutze NUR Informationen aus den Dokumenten oben.
+- Zitiere mit [1], [2], ...
+- Antworte auf Deutsch, sei präzise und technisch.
+- Wenn unsicher: "Die Dokumente enthalten keine Details zu [X]" und nenne die geprüften Dokumente.
 
 ❓ FRAGE: ${userQuery}
 
-💬 DEINE ANTWORT (NUR aus den Dokumenten!):`
+💬 DEINE ANTWORT (NUR aus den Dokumenten, mit Zitaten!):`
 }
 
 

@@ -1,3 +1,4 @@
+"use client"
 /**
  * Wie funktioniert das Routing und Layout in Next.js?
  * 
@@ -13,10 +14,19 @@
  * 3. Globale Styles, Fonts, Metadaten etc. kommen aus layout.tsx
  */
 
+import * as React from 'react'
 import { ChatWindowWithHistory } from '../features/rag-chat/components/chat-window-with-history'
 import { Code2, BookOpen, Lightbulb, Zap, Layers, Terminal } from 'lucide-react'
 
-export default function TechStackAdvisorHome() {
+
+export default function Page() {
+  const [inputValue, setInputValue] = React.useState('');
+  const exampleQuestions = [
+    'Was sind React Hooks und wie benutze ich sie?',
+    'Unterschied zwischen Angular und React?',
+    'Next.js Server Components vs Client Components?',
+    'Erkläre mir JavaScript Closures!'
+  ];
   return (
     <main className="h-screen overflow-hidden flex flex-col py-4 px-4 md:py-6 md:pl-20 md:pr-4 relative">
       {/* Animated background gradients - Tech Theme */}
@@ -60,26 +70,30 @@ export default function TechStackAdvisorHome() {
             </div>
           </div>
 
-          {/* Example Questions - Developer Focus */}
           <div className="flex flex-wrap justify-center gap-2 text-xs px-4">
-            <button className="glass px-3 py-1.5 rounded-full hover-lift transition-all hover:bg-blue-500/10 hover:border-blue-400/30 border border-transparent">
-              ⚛️ &ldquo;Was sind React Hooks und wie benutze ich sie?&rdquo;
-            </button>
-            <button className="glass px-3 py-1.5 rounded-full hover-lift transition-all hover:bg-violet-500/10 hover:border-violet-400/30 border border-transparent">
-              🔷 &ldquo;Unterschied zwischen Angular und React?&rdquo;
-            </button>
-            <button className="glass px-3 py-1.5 rounded-full hover-lift transition-all hover:bg-purple-500/10 hover:border-purple-400/30 border border-transparent">
-              ▲ &ldquo;Next.js Server Components vs Client Components?&rdquo;
-            </button>
-            <button className="glass px-3 py-1.5 rounded-full hover-lift transition-all hover:bg-pink-500/10 hover:border-pink-400/30 border border-transparent">
-              💡 &ldquo;Erkläre mir JavaScript Closures!&rdquo;
-            </button>
+            {exampleQuestions.map((q, i) => (
+              <button
+                key={q}
+                className={
+                  'glass px-3 py-1.5 rounded-full hover-lift transition-all border border-transparent ' +
+                  [
+                    'hover:bg-blue-500/10 hover:border-blue-400/30',
+                    'hover:bg-violet-500/10 hover:border-violet-400/30',
+                    'hover:bg-purple-500/10 hover:border-purple-400/30',
+                    'hover:bg-pink-500/10 hover:border-pink-400/30',
+                  ][i % 4]
+                }
+                onClick={() => setInputValue(q)}
+              >
+                {['⚛️', '🔷', '▲', '💡'][i % 4]} &ldquo;{q}&rdquo;
+              </button>
+            ))}
           </div>
         </div>
 
         {/* Chat Interface - Modern Card */}
         <div className="flex-1 min-h-0 mb-4 animate-in fade-in slide-in-from-bottom-2" style={{ animationDelay: '100ms' }}>
-          <ChatWindowWithHistory />
+          <ChatWindowWithHistory inputValue={inputValue} setInputValue={setInputValue} />
         </div>
 
         {/* Features Section - TechStack Stats */}

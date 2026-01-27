@@ -1,3 +1,27 @@
+/**
+ * Embedding & pgvector – Was ist das?
+ *
+ * Embedding:
+ * - Ein Embedding ist eine Umwandlung von Text (z.B. ein Satz, ein Dokument) in einen numerischen Vektor (z.B. [0.12, -0.98, ...]).
+ * - Ziel: Semantische Bedeutung von Texten als Zahlen abbilden, sodass ähnliche Bedeutungen ähnliche Vektoren haben.
+ * - Beispiel: "React ist eine UI-Bibliothek" und "React wird für Benutzeroberflächen genutzt" → ähnliche Embeddings.
+ * - Embeddings werden meist von KI-Modellen wie OpenAI erzeugt (z.B. text-embedding-3-small).
+ * - Anwendung: Semantische Suche, Clustering, Ähnlichkeitsvergleiche.
+ *
+ * pgvector:
+ * - pgvector ist eine PostgreSQL-Erweiterung, die einen neuen Datentyp "vector" und Funktionen für Vektor-Ähnlichkeitssuche bereitstellt.
+ * - Damit kann man Vektoren (z.B. Embeddings) direkt in einer Postgres-Tabelle speichern und sehr effizient nach ähnlichen Vektoren suchen.
+ * - Unterstützt verschiedene Distanzmaße (cosine, L2, inner product).
+ * - Ermöglicht "Semantic Search" direkt in der Datenbank – ideal für RAG-Systeme.
+ * - Mit Indexen (z.B. HNSW) ist auch Suche in großen Datenmengen performant.
+ *
+ * Im System:
+ * - Jeder Knowledge-Artikel bekommt beim Einfügen ein Embedding (generateEmbedding).
+ * - Dieses Embedding wird in der Supabase-DB (Postgres mit pgvector) gespeichert.
+ * - Bei einer User-Frage wird ebenfalls ein Embedding erzeugt und mit pgvector nach den ähnlichsten Dokumenten gesucht (searchKnowledge).
+ * - So findet das System relevante Antworten, auch wenn die Wörter nicht exakt übereinstimmen.
+ */
+
 import { embed } from 'ai'
 import { embeddingModel } from '../../../lib/openai'
 import { supabaseAdmin } from '../../../lib/supabase'
@@ -13,16 +37,20 @@ export async function generateEmbedding(text: string): Promise<number[]> {
     const { embedding } = await embed({
       model: embeddingModel,
       value: text,
-    })
-    
-    logger.embeddingGenerated(embedding.length, text.length)
-    return embedding
+    });
+
+    // Debug: Logge die ersten Werte des Embeddings
+    logger.info(
+      `Embedding generated for text (length: ${text.length}): [${embedding.slice(0, 5).join(", ")}...]`,
+      { module: "VectorService", function: "generateEmbedding" }
+    );
+    return embedding;
   } catch (error) {
     logger.error('Failed to generate embedding', 
       { module: 'VectorService', function: 'generateEmbedding' },
       error
-    )
-    throw new Error('Failed to generate embedding')
+    );
+    throw new Error('Failed to generate embedding');
   }
 }
 
@@ -37,24 +65,31 @@ export async function searchKnowledge(
 ): Promise<KnowledgeItem[]> {
   // Validation
   if (!query || query.trim().length === 0) {
-    throw new Error('Search query cannot be empty')
+    throw new Error('Search query cannot be empty');
   }
   
   if (!supabaseAdmin) {
-    throw new Error('Supabase admin client not initialized')
+    throw new Error('Supabase admin client not initialized');
   }
 
   try {
     // 1. Generate embedding for the query
-    const queryEmbedding = await generateEmbedding(query)
+    logger.info(
+      `Generating embedding for search query: "${query}"`,
+      { module: "VectorService", function: "searchKnowledge" }
+    );
+    const queryEmbedding = await generateEmbedding(query);
 
     // 2. Call Supabase RPC function for vector similarity search
-    // Send as string format to match how PostgreSQL stores vectors
+    logger.info(
+      `Calling match_knowledge with threshold=${threshold}, limit=${limit}`,
+      { module: "VectorService", function: "searchKnowledge" }
+    );
     const { data, error } = await supabaseAdmin.rpc('match_knowledge', {
       query_embedding: `[${queryEmbedding.join(',')}]`,
       match_threshold: threshold,
       match_count: limit,
-    })
+    });
 
     if (error) {
       logger.error('Supabase RPC call failed',
@@ -68,8 +103,8 @@ export async function searchKnowledge(
           }
         },
         error
-      )
-      throw error
+      );
+      throw error;
     }
 
     // 3. Transform database results to KnowledgeItem type
@@ -78,21 +113,28 @@ export async function searchKnowledge(
       title: item.title,
       content: item.content,
       similarity: item.similarity,
-    }))
-    
-    logger.ragRetrieval(
-      results.length,
-      results[0]?.similarity,
-      threshold
-    )
-    
-    return results
+    }));
+
+    logger.info(
+      `searchKnowledge: Query="${query}", Results=${results.length}, TopSimilarity=${results[0]?.similarity}`,
+      { module: "VectorService", function: "searchKnowledge" }
+    );
+
+    // Debug: Logge alle gefundenen Titel und Ähnlichkeiten
+    if (results.length > 0) {
+      logger.info(
+        `Found titles: ${results.map((r: KnowledgeItem) => `${r.title} (sim: ${r.similarity})`).join(" | ")}`,
+        { module: "VectorService", function: "searchKnowledge" }
+      );
+    }
+
+    return results;
   } catch (error) {
     logger.error('Knowledge search failed',
       { module: 'VectorService', function: 'searchKnowledge' },
       error
-    )
-    throw new Error('Failed to search knowledge base')
+    );
+    throw new Error('Failed to search knowledge base');
   }
 }
 

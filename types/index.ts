@@ -72,22 +72,3 @@ export interface APIResponse<T = unknown> {
   }
 }
 
-/**
- * Database health check result
- */
-export interface DBHealthCheck {
-  status: string
-  documentsInDB: number | null
-  sampleDocument?: {
-    id: string
-    title: string
-    embeddingDimensions: number
-    embeddingType: string
-  }
-  rpcFunctionTest: {
-    exists: boolean
-    error?: string
-    resultCount: number
-  }
-  diagnosis: string
-}

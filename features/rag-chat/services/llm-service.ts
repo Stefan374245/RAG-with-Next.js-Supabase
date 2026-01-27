@@ -1,8 +1,28 @@
 import type { KnowledgeItem } from '../../../types'
 
 /**
- * Build an optimized RAG system prompt with retrieved context
- * Injects relevant knowledge items into the prompt for better LLM responses
+ * Wie arbeitet llm-service.ts mit page.tsx zusammen?
+ *
+ * - page.tsx zeigt das Chat-UI (über ChatWindowWithHistory) und sendet User-Fragen an die API (/api/chat/route.ts).
+ * - Die API ruft buildRAGPrompt (aus llm-service.ts) auf, um einen System-Prompt für das LLM zu bauen.
+ * - buildRAGPrompt bekommt die User-Frage und die gefundenen Wissensquellen (aus der Datenbank).
+ * - Der Prompt wird so gebaut, dass das LLM NUR aus den gefundenen Dokumenten antwortet.
+ * - Die LLM-Antwort wird dann von der API zurück an das Frontend (page.tsx) gestreamt und angezeigt.
+ *
+ * Kurz: llm-service.ts ist das Bindeglied zwischen Datenbankwissen und LLM-Antwort – und sorgt dafür, dass die KI nur aus echten Dokumenten antwortet.
+ */
+
+
+/**
+ * Erzeugt einen Prompt für Retrieval-Augmented Generation (RAG), um eine KI dazu zu bringen,
+ * ausschließlich auf Basis bereitgestellter Dokumente (KnowledgeItems) zu antworten.
+ *
+ * - Wenn keine Quellen gefunden wurden, wird eine standardisierte Antwort generiert, die auf das Fehlen von Informationen hinweist.
+ * - Wenn Quellen vorhanden sind, wird ein strukturierter Prompt mit Kontext und strikten Antwortregeln erstellt.
+ *
+ * @param userQuery Die vom Nutzer gestellte Frage.
+ * @param sources   Eine Liste von KnowledgeItems, die als Kontext für die Antwort dienen.
+ * @returns         Einen deutschsprachigen Prompt, der die KI zur kontextbasierten Beantwortung der Nutzerfrage anleitet.
  */
 export function buildRAGPrompt(
   userQuery: string,
@@ -58,9 +78,12 @@ ${context}
 💬 DEINE ANTWORT (NUR aus den Dokumenten!):`
 }
 
+
 /**
- * Extract key information from user query for better retrieval
- * Simple implementation - can be extended with more sophisticated NLP
+ * Extrahiert Schlüsselwörter aus einer gegebenen Abfrage, indem häufige Stoppwörter entfernt werden.
+ *
+ * @param query - Die Eingabeabfrage als Zeichenkette.
+ * @returns Ein Array von bedeutungsvollen Begriffen ohne Stoppwörter und Wörter mit weniger als drei Zeichen.
  */
 export function extractQueryKeywords(query: string): string[] {
   // Remove common stop words and extract meaningful terms

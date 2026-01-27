@@ -1,6 +1,14 @@
 /**
- * Centralized Logging Service
- * Provides consistent logging across the RAG system
+ * Was macht logger.ts?
+ *
+ * - logger.ts stellt einen zentralen Logging-Service für das gesamte RAG-System bereit.
+ * - Einheitliche Log-Ausgabe für Debug, Info, Warnungen und Fehler (inkl. Zeitstempel, Modul, Funktion, Metadaten).
+ * - Unterstützt Umgebungsabhängigkeit: Im Development-Modus werden mehr Details geloggt.
+ * - Spezielle Methoden für RAG-spezifische Logs (z.B. ragQuery, ragRetrieval, embeddingGenerated).
+ * - Wird von allen wichtigen Services (API, Vector-Service, LLM-Service) genutzt, um Fehler, Anfragen und Systemereignisse nachvollziehbar zu machen.
+ * - Erleichtert Debugging, Monitoring und Fehleranalyse im gesamten System.
+ *
+ * Kurz: logger.ts sorgt für nachvollziehbare, strukturierte Logs und ist die zentrale Stelle für alle Konsolen-Ausgaben im Projekt.
  */
 
 export enum LogLevel {
@@ -27,7 +35,6 @@ class Logger {
     const timestamp = new Date().toISOString()
     const moduleName = context?.module ? `[${context.module}]` : ''
     const functionName = context?.function ? `.${context.function}` : ''
-    
     return `${timestamp} ${level} ${moduleName}${functionName}: ${message}`
   }
 
@@ -38,25 +45,14 @@ class Logger {
     data?: unknown
   ): void {
     const formattedMessage = this.formatMessage(level, message, context)
-
-    switch (level) {
-      case LogLevel.DEBUG:
-        if (this.isDevelopment) {
-          console.log(formattedMessage, data || '')
-        }
-        break
-      case LogLevel.INFO:
-        console.log(formattedMessage, data || '')
-        break
-      case LogLevel.WARN:
-        console.warn(formattedMessage, data || '')
-        break
-      case LogLevel.ERROR:
-        console.error(formattedMessage, data || '')
-        if (context?.metadata) {
-          console.error('Metadata:', context.metadata)
-        }
-        break
+    // Immer loggen, auch in Production (zur Fehlersuche)
+    if (level === LogLevel.ERROR || level === LogLevel.WARN) {
+      console.error(formattedMessage, data || '')
+    } else {
+      console.log(formattedMessage, data || '')
+    }
+    if (context?.metadata) {
+      console.log('Metadata:', context.metadata)
     }
   }
 
@@ -76,7 +72,6 @@ class Logger {
     const metadata = error instanceof Error 
       ? { errorMessage: error.message, stack: error.stack }
       : { error }
-    
     this.log(LogLevel.ERROR, message, {
       ...context,
       metadata: { ...context?.metadata, ...metadata }
@@ -126,3 +121,6 @@ class Logger {
 }
 
 export const logger = new Logger()
+
+// Test-Log beim Import (nur zu Debugzwecken, kann wieder entfernt werden)
+logger.info("Logger initialized", { module: "Logger" })

@@ -1,21 +1,31 @@
+--
+-- RAG AI: Initiales Datenbank-Schema für Wissensdatenbank & Vektorsuche
+--
+-- Diese Migration richtet die nötigen Tabellen, Indizes und Funktionen für ein Retrieval-Augmented-Generation (RAG) System ein.
+-- Jede Sektion ist unten auf Deutsch dokumentiert.
+
 -- Enable pgvector Extension
+-- Aktiviert die pgvector-Erweiterung, damit Vektor-Operationen (z.B. Ähnlichkeitssuche) in Postgres möglich sind.
 CREATE EXTENSION IF NOT EXISTS vector;
 
 -- Knowledge Base Table
+-- Haupttabelle für alle Wissensdokumente. Jedes Dokument erhält ein Embedding (Vektor), das für die semantische Suche genutzt wird.
 CREATE TABLE knowledge_base (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   title TEXT NOT NULL,
   content TEXT NOT NULL,
-  embedding vector(1536) NOT NULL, -- OpenAI text-embedding-3-small dimensions
+  embedding vector(1536) NOT NULL,
   metadata JSONB DEFAULT '{}',
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
 -- Performance Index for Cosine Similarity (HNSW)
+-- Index für schnelle Vektor-Ähnlichkeitssuche (cosine similarity) mit HNSW-Algorithmus.
 CREATE INDEX idx_knowledge_embedding ON knowledge_base 
 USING hnsw (embedding vector_cosine_ops);
 
 -- Optional: Chat History Table
+-- Tabelle für Chat-Verläufe. Speichert alle Nachrichten einer Session inkl. Rolle (user/assistant) und ggf. Quellen.
 CREATE TABLE chat_history (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   session_id UUID NOT NULL,
@@ -25,9 +35,12 @@ CREATE TABLE chat_history (
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+-- Index für schnelle Abfrage aller Nachrichten einer Session (z.B. für Verlauf).
 CREATE INDEX idx_chat_session ON chat_history(session_id, created_at DESC);
 
 -- RPC Function: Semantic Search via Cosine Similarity
+-- Postgres-Funktion für die semantische Suche: Findet die ähnlichsten Dokumente zur Anfrage (query_embedding) per Cosinus-Ähnlichkeit.
+-- Wird von der App für die Vektorsuche genutzt (z.B. searchKnowledge()).
 CREATE OR REPLACE FUNCTION match_knowledge(
   query_embedding vector(1536),
   match_threshold FLOAT DEFAULT 0.7,
@@ -56,6 +69,8 @@ END;
 $$;
 
 -- RPC Function: Insert document with proper vector type
+-- Postgres-Funktion zum Einfügen eines Dokuments inkl. Embedding in die knowledge_base-Tabelle.
+-- Wird von seed-knowledge.ts und anderen Import-Skripten genutzt.
 CREATE OR REPLACE FUNCTION insert_knowledge(
   p_title TEXT,
   p_content TEXT,

@@ -162,8 +162,8 @@ export function ChatWindowWithHistory() {
                   Welcome to TechStack Advisor 💻
                 </h3>
                 <p className="text-sm text-gray-400 max-w-md font-light">
-                                  Stelle Fragen zu JavaScript, Angular, React, Next.js oder jedem anderen Webentwicklungs-Thema. Das System durchsucht die umfassende Entwickler-Dokumentation.
-
+                                  Stelle Fragen zu JavaScript, Angular, React, Next.js oder jedem anderen Webentwicklungs-Thema.
+                                  Das System durchsucht die umfassende Entwickler-Dokumentation.
                   </p>
                 </div>
               </div>

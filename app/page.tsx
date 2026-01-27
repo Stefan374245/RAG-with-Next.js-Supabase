@@ -1,3 +1,18 @@
+/**
+ * Wie funktioniert das Routing und Layout in Next.js?
+ * 
+ * - Jede Datei page.tsx im app/-Verzeichnis ist eine Seite (Route), z.B. /app/page.tsx = /
+ * - Das RootLayout (layout.tsx) umschließt automatisch jede Seite und liefert das HTML-Grundgerüst (z.B. <html>, <body>).
+ * - Alles, was du in page.tsx exportierst (z.B. TechStackAdvisorHome), wird im {children}-Slot von layout.tsx angezeigt.
+ * - Das heißt: layout.tsx ist wie das App-Template in Angular, page.tsx ist wie eine einzelne Route/Komponente.
+ * - Navigation zwischen Seiten geschieht automatisch über das Dateisystem (keine Router-Konfiguration nötig).
+ * 
+ * Ablauf:
+ * 1. User ruft / auf → Next.js rendert layout.tsx
+ * 2. Im <body> von layout.tsx wird <TechStackAdvisorHome /> aus page.tsx als {children} angezeigt
+ * 3. Globale Styles, Fonts, Metadaten etc. kommen aus layout.tsx
+ */
+
 import { ChatWindowWithHistory } from '../features/rag-chat/components/chat-window-with-history'
 import { Code2, BookOpen, Lightbulb, Zap, Layers, Terminal } from 'lucide-react'
 

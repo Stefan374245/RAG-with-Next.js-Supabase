@@ -1,11 +1,15 @@
 /**
- * 🎓 TechStack Advisor - Knowledge Base Seeder
- * Compact, focused documents for developer knowledge
- * 
- * Usage: npm run seed:tech
+ * Was macht seed-knowledge.ts?
+ *
+ * - Dieses Skript befüllt die Wissensdatenbank (Supabase) mit kompakten, thematisch sortierten Tech-Dokumenten.
+ * - Es lädt Umgebungsvariablen, prüft die Konfiguration und importiert alle TECH_DOCUMENTS (JavaScript, TypeScript, React, Next.js, Angular, Best Practices etc.).
+ * - Für jedes Dokument wird ein Embedding erzeugt und das Dokument per storeDocument() in die Datenbank geschrieben.
+ * - Das Skript gibt eine Zusammenfassung aus, wie viele Dokumente erfolgreich gespeichert wurden.
+ * - Wird typischerweise per `npm run seed:tech` ausgeführt, um die Datenbank für das RAG-System mit Startwissen zu füllen.
+ *
+ * Kurz: seed-knowledge.ts ist der Initialimporteur für eure Entwickler-Wissensdatenbank.
  */
 
-// Load .env.local FIRST
 import { config } from 'dotenv'
 import { resolve } from 'path'
 config({ path: resolve(process.cwd(), '.env.local') })
@@ -22,13 +26,8 @@ if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_
 
 console.log('✅ Environment variables loaded\n')
 
-// Import knowledge modules
-
-// Tech Stack Documents - Focused and concise
 const TECH_DOCUMENTS = [
-  // ========== JAVASCRIPT FUNDAMENTALS (from modules) =========
-  
-  // ========== JAVASCRIPT (additional inline) ==========
+
   {
     title: 'JavaScript Closures',
     content: `A closure is a function that has access to variables from its outer scope, even after the outer function returns. Example:
@@ -445,7 +444,7 @@ Good for: Theme, auth, language. Not ideal for frequently changing data (perform
 
   // ========== PERFORMANCE ==========
   {
-    title: 'React useMemo and useCallback',
+    title: 'React server-side functions and useCallback',
     content: `useMemo and useCallback optimize performance by memoizing values and functions.
 
 useMemo: Memoize expensive computations

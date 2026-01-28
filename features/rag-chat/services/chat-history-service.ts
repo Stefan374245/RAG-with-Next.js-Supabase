@@ -81,7 +81,6 @@ export class ChatHistoryService {
 
       if (error) throw error
 
-      // Group by session_id and get the latest message for each
       const sessionMap = new Map<string, ChatSession>()
       
       data?.forEach((row: any) => {

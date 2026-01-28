@@ -39,6 +39,17 @@ export const APP_CONFIG = {
 } as const;
 
 
+/**
+ * Validates that all required environment variables are set.
+ *
+ * This function checks for the presence of the following environment variables:
+ * - `NEXT_PUBLIC_SUPABASE_URL`
+ * - `OPENAI_API_KEY`
+ *
+ * If any of these variables are missing, it throws an error listing the missing variables.
+ *
+ * @throws {Error} If one or more required environment variables are missing.
+ */
 export function validateConfig(): void {
   const required = ["NEXT_PUBLIC_SUPABASE_URL", "OPENAI_API_KEY"];
   const missing = required.filter((key) => !process.env[key]);

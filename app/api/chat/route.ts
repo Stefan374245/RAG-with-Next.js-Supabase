@@ -1,25 +1,3 @@
-/**
- * 🚦 route.ts Cheat Sheet (Chat API mit RAG)
- * 
- * Ablauf:
- * 1. POST-Request mit { messages: [{role, content}, ...] }
- * 2. parseRequest: Validiert und normalisiert Nachrichten (nur "user" & "assistant" erlaubt)
- * 3. buildSearchQuery: Baut Query aus letzten Nachrichten für semantische Suche
- * 4. retrieveSources: Sucht relevante Wissensquellen (Supabase/Vector-DB)
- * 5. buildRAGPrompt: Erstellt System-Prompt mit Kontext aus Quellen
- * 6. generateStreamResponse: Streamt LLM-Antwort (mit vollständigem Chat-Verlauf)
- * 7. Antwort: Stream + Debug-Header (X-RAG-Sources, X-RAG-Query)
- * 
- * Fehler:
- * - 400: Fehlende/Leere Nachrichten
- * - 500: Interner Fehler (mit Log)
- * 
- * Wichtig:
- * - Nur "user" und "assistant" Rollen werden akzeptiert
- * - Query für Suche und Header wird auf ASCII limitiert
- * - Prompt-Logik und Retrieval strikt getrennt
- */
-
 import { streamText, type CoreMessage } from "ai";
 import { chatModel } from "../../../lib/openai";
 import { searchKnowledge } from "../../../features/rag-chat/services/vector-service";
@@ -120,7 +98,6 @@ async function retrieveSources(messages: LLMMessage[]) {
       { module: "ChatAPI", function: "retrieveSources", metadata: { query } },
       err
     );
-    // Fehler weiterwerfen, damit POST darauf reagieren kann
     throw new Error("Knowledge base not reachable or embedding error");
   }
   logger.info(
@@ -176,11 +153,8 @@ export async function POST(req: Request) {
 
     logger.ragQuery(userMessage, 0);
 
-    // Retrieval using conversation-based query
     const { sources, query } = await retrieveSources(messages);
-    // Augmentation
     const systemPrompt = buildRAGPrompt(userMessage, sources);
-    // Generation (stream) using the full messages array
     const result = await generateStreamResponse(systemPrompt, messages);
 
     const response = result.toDataStreamResponse();
@@ -193,7 +167,6 @@ export async function POST(req: Request) {
 
     return response;
   } catch (error) {
-    // Fehlerausgabe für DB-Probleme
     if (
       error instanceof Error &&
       (error.message === "Missing messages" ||
@@ -231,7 +204,6 @@ export async function POST(req: Request) {
   }
 }
 
-// Direkt nach Import: Prüfe Supabase-Konfiguration
 if (!supabaseAdmin) {
   logger.error("Supabase Admin Client is NOT initialized! Check SUPABASE_SERVICE_ROLE_KEY and NEXT_PUBLIC_SUPABASE_URL.", { module: "ChatAPI" });
 }

@@ -30,10 +30,33 @@ TechStack Advisor ist ein modernes Retrieval-Augmented-Generation (RAG) System, 
 - Fragebeispiele: "Was ist ein React Server Component?", "Wie funktioniert die Vektorsuche?"
 - Quellenangaben werden im Chat angezeigt
 
+
+---
+
+## 🧩 Chunking-Logik: splitTextIntoChunks
+
+Um lange Texte effizient für die semantische Suche vorzubereiten, nutzt das System eine eigene Chunking-Funktion:
+
+- **splitTextIntoChunks** teilt große Texte in überlappende Abschnitte (Chunks), z.B. 512 Wörter pro Chunk mit 50 Wörtern Überlappung (Standardwerte).
+- Die Chunk-Größe und Überlappung sind konfigurierbar (siehe `APP_CONFIG` in `lib/constants.ts`).
+- Die Funktion approximiert Token durch Wörter – das ist für OpenAI-Embeddings ausreichend genau.
+- Vorteil: Auch längere Dokumente werden vollständig und mit Kontextabdeckung indiziert, ohne dass relevante Informationen an Chunk-Grenzen verloren gehen.
+- Die Chunks werden als einzelne Einträge in der Vektordatenbank gespeichert und bei der Suche als Kontext für das LLM verwendet.
+
+**Beispiel:**
+
+```ts
+import { splitTextIntoChunks } from './lib/utils';
+
+const text = '...langer Text...';
+const chunks = splitTextIntoChunks(text, 512, 50);
+// → Gibt ein Array von Strings zurück, jeder String ist ein Chunk
+```
+
 ---
 
 **Challenge umgesetzt von:**
-[Dein Name]
+[Stefan Helldobler](https://stefan-helldobler.de/portfolio/) | [https://github.com/Stefan374245/RAG-with-Next.js-Supabase]
 
 [![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19-blue)](https://react.dev/)

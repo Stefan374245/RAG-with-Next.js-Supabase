@@ -16,12 +16,20 @@ import { twMerge } from 'tailwind-merge'
 import { APP_CONFIG } from './constants'
 
 
+/**
+ * Merges multiple class values into a single string, handling conditional and array-based class names.
+ * Utilizes `clsx` for class name composition and `twMerge` for Tailwind CSS class deduplication.
+ *
+ * @param inputs - An array of class values (strings, arrays, or objects) to be merged.
+ * @returns A single string of merged class names with Tailwind CSS classes deduplicated.
+ */
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
 /**
  * Generate a random session ID for anonymous users
+ * @returns UUID string
  */
 export function generateSessionId(): string {
   return crypto.randomUUID()
@@ -29,6 +37,8 @@ export function generateSessionId(): string {
 
 /**
  * Format timestamp for display
+ * @param date Date object
+ * @returns Formatted time string (HH:MM)
  */
 export function formatTimestamp(date: Date): string {
   return new Intl.DateTimeFormat('de-DE', {
@@ -38,9 +48,15 @@ export function formatTimestamp(date: Date): string {
 }
 
 /**
- * splitTextIntoChunks: Teilt einen langen Text in überlappende Chunks (Standard: 512 Token, 50 Overlap)
- * - Nutzt Wortanzahl als Approximation für Token (für OpenAI-Embeddings ausreichend)
- * - Gibt ein Array von Strings zurück, jeder String ist ein Chunk
+ * splitTextIntoChunks: Teilt einen langen Text in überlappende Chunks und nutzt die in constants.ts definierten Standardwerte.
+ *
+ * - Nützlich für die Verarbeitung langer Texte, z.B. beim Erzeugen von Embeddings oder bei der semantischen Suche.
+ * - Teilt den Text in Chunks der angegebenen Größe (chunkSize) mit einer Überlappung (chunkOverlap).
+ *
+ * @param text          Der lange Text, der in Chunks aufgeteilt werden soll.
+ * @param chunkSize     Die gewünschte Größe jedes Chunks (Standard: APP_CONFIG.CHUNK_SIZE).
+ * @param chunkOverlap  Die Anzahl der Wörter, die sich zwischen aufeinanderfolgenden Chunks überlappen (Standard: APP_CONFIG.CHUNK_OVERLAP).
+ * @returns             Ein Array von Text-Chunks.
  */
 export function splitTextIntoChunks(
   text: string,

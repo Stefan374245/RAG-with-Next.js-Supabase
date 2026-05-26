@@ -7,9 +7,14 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "seed": "tsx scripts/seed-knowledge.ts"
+    "seed": "tsx scripts/seed-knowledge.ts",
+    "seed:rescue-me": "tsx scripts/seed-rescue-me.ts",
+    "seed:facts": "tsx scripts/seed-facts.ts",
+    "extract:facts": "tsx scripts/extract-facts-from-pdf.ts"
   },
   "dependencies": {
+    "@google/genai": "^1.0.0",
+    "pdf-parse": "^1.1.1",
     "@ai-sdk/openai": "^0.0.66",
     "@supabase/supabase-js": "^2.39.0",
     "ai": "^3.0.0",
@@ -25,6 +30,7 @@
   },
   "devDependencies": {
     "@types/node": "^20",
+    "@types/pdf-parse": "^1.1.4",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "dotenv": "^17.2.3",

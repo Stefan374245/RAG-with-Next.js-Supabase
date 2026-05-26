@@ -39,3 +39,9 @@ next-env.d.ts
 # Supabase seed files (contains demo data)
 supabase/seed.sql
 supabase/migrations/*seed*.sql
+
+# Supabase local temp files
+supabase/.temp/
+
+# Workshop manuals (copyrighted PDFs — not for version control)
+manuals/

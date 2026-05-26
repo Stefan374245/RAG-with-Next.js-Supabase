@@ -1,0 +1,48 @@
+[
+  { "fact": "Engine oil capacity with filter: 1.9 L", "category": "fluids" },
+  { "fact": "Engine oil capacity without filter: 1.7 L", "category": "fluids" },
+  { "fact": "Recommended engine oil: 10W-50 or 15W-50 fully synthetic (e.g. Motorex Cross Power 4T)", "category": "fluids" },
+  { "fact": "Coolant capacity: 1.2 L", "category": "fluids" },
+  { "fact": "Fuel tank capacity: 13 L", "category": "fluids" },
+  { "fact": "Reserve fuel: approx. 2 L", "category": "fluids" },
+
+  { "fact": "Rear axle nut torque: 65 Nm", "category": "torque_specs" },
+  { "fact": "Swing arm pivot bolt torque: 45 Nm", "category": "torque_specs" },
+  { "fact": "Front axle nut torque: 25 Nm", "category": "torque_specs" },
+  { "fact": "Spark plug torque: 15 Nm", "category": "torque_specs" },
+  { "fact": "Engine oil drain plug torque: 20 Nm", "category": "torque_specs" },
+  { "fact": "Oil filter cover torque: 15 Nm", "category": "torque_specs" },
+  { "fact": "Brake disc bolt torque front: 15 Nm (thread locker required)", "category": "torque_specs" },
+  { "fact": "Brake disc bolt torque rear: 12 Nm (thread locker required)", "category": "torque_specs" },
+
+  { "fact": "Front tyre pressure solo riding: 1.5 bar (22 psi)", "category": "tyre_pressures" },
+  { "fact": "Rear tyre pressure solo riding: 1.8 bar (26 psi)", "category": "tyre_pressures" },
+  { "fact": "Front tyre pressure with luggage/pillion: 1.6 bar (23 psi)", "category": "tyre_pressures" },
+  { "fact": "Rear tyre pressure with luggage/pillion: 2.0 bar (29 psi)", "category": "tyre_pressures" },
+  { "fact": "Standard front tyre: 90/90-21", "category": "tyre_pressures" },
+  { "fact": "Standard rear tyre: 150/70 R17", "category": "tyre_pressures" },
+
+  { "fact": "Engine oil change interval: every 7,500 km or annually", "category": "service_intervals" },
+  { "fact": "Spark plug inspection interval: every 7,500 km", "category": "service_intervals" },
+  { "fact": "Air filter cleaning interval: every 7,500 km (more often in dusty conditions)", "category": "service_intervals" },
+  { "fact": "Valve clearance check interval: every 30,000 km", "category": "service_intervals" },
+  { "fact": "Coolant change interval: every 2 years or 30,000 km", "category": "service_intervals" },
+  { "fact": "Chain lubrication interval: every 500 km or after each rain/off-road ride", "category": "service_intervals" },
+  { "fact": "Drive chain inspection and adjustment: every 1,000 km", "category": "service_intervals" },
+
+  { "fact": "Spark plug type: NGK LMAR8AI-8", "category": "consumables" },
+  { "fact": "Spark plug electrode gap: 0.6 mm", "category": "consumables" },
+  { "fact": "Drive chain type: 5/8 x 1/4 (520)", "category": "consumables" },
+  { "fact": "Drive chain link count: 118 links", "category": "consumables" },
+  { "fact": "Front sprocket teeth: 15 T", "category": "consumables" },
+  { "fact": "Rear sprocket teeth: 40 T", "category": "consumables" },
+
+  { "fact": "Front brake fluid: DOT 4", "category": "electrical" },
+  { "fact": "Rear brake fluid: DOT 4", "category": "electrical" },
+  { "fact": "Battery type: 12V, 8 Ah (MF sealed)", "category": "electrical" },
+  { "fact": "Idle speed: 1,400 ± 100 rpm", "category": "electrical" },
+
+  { "fact": "Drive chain slack (cold): 5-7 mm measured at lowest chain point", "category": "adjustments" },
+  { "fact": "Clutch lever free play: 2-3 mm at lever tip", "category": "adjustments" },
+  { "fact": "Brake lever free play: minimal — hydraulic brakes self-adjust", "category": "adjustments" }
+]

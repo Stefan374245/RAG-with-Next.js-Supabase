@@ -1,0 +1,1794 @@
+[
+  {
+    "fact": "Bottom triple clamp screw torque: 15 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Brake line holder screw torque: 12 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Front wheel spindle screw torque: 45 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Wheel spindle torque: 45 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Front brake caliper screw torque: 45 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Chassis remaining screws torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Fork stub screw torque: 15 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Fork oil per fork leg: 630 ml",
+    "category": "fluids"
+  },
+  {
+    "fact": "Spring rate for rider 65-75 kg: 6.2 N/mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Spring rate for rider 75-85 kg: 6.7 N/mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Spring rate for rider 85-95 kg: 7.2 N/mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Screw cap on piston rod torque: 12 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Fork oil type: SAE 4",
+    "category": "consumables"
+  },
+  {
+    "fact": "Fork oil part number: 48601166S1",
+    "category": "consumables"
+  },
+  {
+    "fact": "Steering head screw torque: 18 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Top triple clamp screw torque: 15 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Steering stem screw torque: 20 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Handlebar clamp screw torque: 20 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Front wheel spindle torque: 45 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Remaining chassis screws torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Clutch lever free travel: 5 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Handlebar support screw torque: 45 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Lever clearance: 5 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Throttle grip screw torque: 3.5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Hand guard screw torque: 25 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Mask support screw on steering head torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Mask support screw torque: 5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Screw, trim torque: 3 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Remaining screws, chassis torque: 1 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Remaining screws, chassis torque: 5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Chassis screw torque: 55 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Top shock absorber screw torque: 80 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Bottom shock absorber screw torque: 80 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Shock absorber support bushing torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Chassis remaining screws torque: 55 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Rear brake fluid reservoir screw torque: 55 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Torque for M18 lock nut: 110 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Torque for M18 foot section: 150 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Nut, piston rod, large rod torque: 140 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Nut, piston rod, small rod torque: 130 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Compression adjuster torque: 135 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Shock absorber fluid type: SAE 2.5",
+    "category": "consumables"
+  },
+  {
+    "fact": "Shock absorber fluid part number: 50180751S1",
+    "category": "consumables"
+  },
+  {
+    "fact": "Filling port screw torque: 14 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Nitrogen gas pressure: 16 bar",
+    "category": "tyre_pressures"
+  },
+  {
+    "fact": "Nitrogen gas pressure: 232 psi",
+    "category": "tyre_pressures"
+  },
+  {
+    "fact": "Swingarm pivot screw torque: 100 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Engine sprocket cover screw torque: 5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Shift rod screw torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Torque for remaining chassis screws: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Torque for chain guide fitting: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Torque for screws on chain guard: 5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Main silencer holder torque: 25 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Exhaust clamp torque: 8 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Exhaust clamp distance: 1 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Presilencer screw torque: 15 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Manifold clamp screw torque: 8 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Exhaust flange nut torque: 15 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Main silencer fastening screw torque: 15 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Presilencer exhaust clamp screw torque: 8 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Clamp distance: 1 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Presilencer on frame screw torque: 15 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Front footrest bracket screw M10x40 torque: 45 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Front footrest bracket screw M10x65 torque: 45 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Front footrest bracket screw M10x30 torque: 45 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Shift lever screw torque: 14 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Chassis remaining screws torque: 25 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Part number: R06220-10",
+    "category": "consumables"
+  },
+  {
+    "fact": "Part number: R06221-10",
+    "category": "consumables"
+  },
+  {
+    "fact": "Seat fixing screw torque: 6 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Trim screw torque: 3 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Fuel tank spoiler screw torque: 5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Engine guard screw torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Engine guard screw torque: 8 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Chassis screw torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Windshield screw torque: 5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Front wheel speed sensor screw torque: 6 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Nut, tire pressure sensor torque: 12 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Rear wheel spindle nut torque: 90 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Rear wheel speed sensor screw torque: 6 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Valve nut torque: 12 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Tire pressure sensor nut torque: 12 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Rear sprocket nut torque: 35 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Engine sprocket nut torque: 100 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Battery voltage: 12 V",
+    "category": "electrical"
+  },
+  {
+    "fact": "Battery type: HTZ12A-BS",
+    "category": "consumables"
+  },
+  {
+    "fact": "Torque for battery terminal screws: 4.5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Torque for battery holding bracket screw: 4.5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Brake lining securing bolt torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Front brake fluid reservoir cover torque: 2 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Brake fluid reservoir cover torque: 2 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Pin, rear brake caliper torque: 22 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Free travel at foot brake lever: 3 to 5 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Nut, foot brake lever adjustment torque: 66 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Nut, push rod, foot brake lever torque: 66 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Screw, foot brake lever stub torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Banjo bolt torque: 25 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Swingarm linkage bracket torque: 25 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Front footrest bracket screw torque: 45 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Engine fixing arm linkage bracket screw torque: 25 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Engine bracket screw torque: 45 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Foot brake lever fitting torque: 25 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Floor jack attachment part number: 63529055000",
+    "category": "consumables"
+  },
+  {
+    "fact": "Sub-frame screw torque: 50 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Starter motor screw torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Chassis remaining nuts torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Engine remaining screws torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Bleeder flange screw torque: 8 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Radiator bracket bottom screw torque: 5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Engine oil capacity with filter: 2.8 L",
+    "category": "fluids"
+  },
+  {
+    "fact": "Engine oil type: SAE 10W/50",
+    "category": "consumables"
+  },
+  {
+    "fact": "Engine case screw torque: 25 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Crankshaft bearing clearance new: 0.030 to 0.060 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Crankshaft bearing wear limit: 0.080 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Oil nozzle torque: 5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Crankshaft main bearing diameter (Blue): 37.985 to 37.995 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Crankshaft main bearing diameter (Red): 37.995 to 38.005 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Conrod bearing screw torque: 1st stage 5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Conrod bearing screw torque: 2nd stage 20 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Connecting rod radial clearance new: 0.030 to 0.060 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Connecting rod radial clearance wear limit: 0.080 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Crankshaft crank pin diameter blue: 37.983 to 37.993 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Crankshaft crank pin diameter red: 37.993 to 38.003 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Piston/cylinder mounting clearance in new condition: 0.035 to 0.070 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Piston/cylinder mounting clearance wear limit: 0.10 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Valve spring mounter part number: 59029019000",
+    "category": "consumables"
+  },
+  {
+    "fact": "Insert for valve spring lever part number: 63529060000",
+    "category": "consumables"
+  },
+  {
+    "fact": "Limit plug gauge part number: 77029026000",
+    "category": "consumables"
+  },
+  {
+    "fact": "Feeler gauge part number: 79129941000",
+    "category": "consumables"
+  },
+  {
+    "fact": "Cylinder head sealing area distortion: ≤0.05 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Intake valve sealing seat width: 2.80 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Exhaust valve sealing seat width: 3.00 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Valve plate run-out: ≤0.05 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Valve stem run-out: ≤0.05 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Minimum clutch spring length: 43.0 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "New clutch disc pack thickness: 35.60 to 36.40 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Clutch disc pack wear limit: 34.80 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Shift drum locating screw torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Engine case screw M8x90 torque: 25 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Engine case screw M8x65 torque: 25 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Engine case screw M8x55 torque: 25 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Engine case screw M8x45 torque: 25 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Engine case screw M6x60 torque: 12 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Engine case screw M6x30 torque: 12 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Oil pump unit screw torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Pressure plate screw torque: 3 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Oil pan screw M6x35 torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Oil pan screw M6x30 torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Rotor screw torque: 90 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Locking screw part number: 61229015000",
+    "category": "consumables"
+  },
+  {
+    "fact": "Tensioning rail screw torque: 15 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Cylinder head screw torque, 1st stage: 5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Cylinder head screw torque, 2nd stage: 15 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Cylinder head screw torque, 3rd stage: 90 degrees",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Cylinder head screw torque, 4th stage: 90 degrees",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Cylinder head screw torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Timing chain shaft screw torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Camshaft bearing bridge screw torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Timing chain tensioner plug torque: 25 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Timing chain tensioner unlocking screw torque: 18 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Release device for timing chain tensioner part number: 61229021000",
+    "category": "consumables"
+  },
+  {
+    "fact": "Setting gauge part number: 63529530000",
+    "category": "consumables"
+  },
+  {
+    "fact": "Setting gauge part number: 63529059000",
+    "category": "consumables"
+  },
+  {
+    "fact": "Locking screw torque: 15 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Intake valve clearance at 20°C: 0.10 to 0.15 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Exhaust valve clearance at 20°C: 0.15 to 0.20 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Spark plug torque: 11 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Shift shaft retaining bracket screw torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Locking lever screw torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Spark plug wrench part number: 77229172000",
+    "category": "consumables"
+  },
+  {
+    "fact": "Screw, oil pump idler gear torque: 15 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Nut, inner clutch hub torque: 135 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Holding wrench part number: 51129003000",
+    "category": "consumables"
+  },
+  {
+    "fact": "Clutch spring screw torque: 8 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Clutch cover screw M6x30 torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Clutch cover screw M6x25 torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Clutch cover screw M6x35 torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Water pump wheel screw torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Water pump cover screw torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Thermostat case screw torque: 6 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Oil/water heat exchanger screw torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Crankshaft speed sensor screw torque: 6 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Torque for alternator cover screws M6x30: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Torque for alternator cover screws M6x35: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Torque for alternator cover screw plug M24x1.5: 8 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Gear position sensor screw torque: 6 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Shift shaft sensor screw torque: 6 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Valve cover screw torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Ignition coil screw torque: 8 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Oil filter cover screw torque: 6 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Oil screen plug torque: 20 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Clutch release lever torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Torque for nut on shift rod: 6 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Torque for screw on gear position sensor: 6 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Coolant capacity: 1.60 L",
+    "category": "fluids"
+  },
+  {
+    "fact": "Compensating tank cover torque: 1.1 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Valve clearance intake: 0.10 to 0.15 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Valve clearance exhaust: 0.15 to 0.20 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Screw plug, alternator cover torque: 8 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Spark plug type: M10",
+    "category": "consumables"
+  },
+  {
+    "fact": "Clutch spring screw torque: 6 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Clutch cover screw torque M6x30: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Clutch cover screw torque M6x25: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Clutch cover screw torque M6x35: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Remaining engine screws torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Alternator output at 4000 rpm: ≥50 V",
+    "category": "electrical"
+  },
+  {
+    "fact": "Ignition coil primary winding resistance: 0.70 to 0.90 Ohms",
+    "category": "electrical"
+  },
+  {
+    "fact": "Chassis screws torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Valve play intake at 20°C: 0.10 to 0.15 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Valve play exhaust at 20°C: 0.15 to 0.20 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Alternator output: 12 V, 400 W",
+    "category": "electrical"
+  },
+  {
+    "fact": "Spark plug type: NGK LMAR9AI-10",
+    "category": "consumables"
+  },
+  {
+    "fact": "Spark plug electrode gap: 1.0 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Axial clearance of lower conrod bearing: 0.15 to 0.30 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Radial clearance of lower conrod bearing (new): 0.030 to 0.060 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Radial clearance of lower conrod bearing (wear limit): 0.080 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Crankshaft bearing clearance (new): 0.030 to 0.060 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Crankshaft bearing clearance (wear limit): 0.080 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Crankshaft axial play: 0.15 to 0.25 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Crankshaft run-out at bearing pin: ≤0.10 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Balancer shaft axial play: 0.05 to 0.20 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Clutch disc pack thickness (new): 35.60 to 36.40 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Clutch disc pack thickness (wear limit): 34.80 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Clutch spring length: ≥43.0 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Oil pressure regulator valve spring minimum length: 42.0 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Play between external rotor and oil pump housing: ≤0.15 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Clearance between external and internal rotor: ≤0.20 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Oil pump axial play: 0.03 to 0.08 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Oil pressure at idle speed (coolant ≥70°C): ≥1.4 bar",
+    "category": "tyre_pressures"
+  },
+  {
+    "fact": "Oil pressure at 6,000 rpm (coolant ≥70°C): ≥2.4 bar",
+    "category": "tyre_pressures"
+  },
+  {
+    "fact": "Main shaft axial clearance: 0.10 to 0.40 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Transmission shaft run-out: ≤0.025 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Valve clearance: 0.10 to 0.40 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Shift shaft play: 0.40 to 0.80 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Fuel pressure when pump is active: 3.8 to 4.2 bar",
+    "category": "tyre_pressures"
+  },
+  {
+    "fact": "Fuel pressure when pump is active: 55 to 61 psi",
+    "category": "tyre_pressures"
+  },
+  {
+    "fact": "Water pump drain hole screw plug torque: 8 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Intake flange hose clamp torque: 2.5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Engine vent nozzle torque: 2 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Piston cooling oil nozzle torque: 2 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Cylinder head oil nozzle torque: 2 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Remaining engine screws torque: 6 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Cam lever axial lock screw torque: 6 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Shift drum retaining bracket screw torque: 6 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Balancer shaft securing screw torque: 5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Swing angle sensor screw torque: 6 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Starter motor cable nut torque: 5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Remaining screws, engine: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Screw, alternator cover M6x30: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Screw, alternator cover M6x35: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Screw, camshaft bearing bridge: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Screw, clutch cable retaining bracket: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Screw, clutch cover: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Screw, clutch release lever: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Screw, clutch spring: 8 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Screw, cylinder head: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Screw, engine case M6x30: 12 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Screw, engine case M6x60: 12 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Screw, freewheel ring: 14 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Screw, ignition coil: 8 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Screw, locking lever: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Screw, main shaft bearing support: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Screw, oil pan M6x30: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Screw, oil pan M6x35: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Screw, oil pump cover: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Screw, oil pump unit: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Screw, oil/water heat exchanger: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Screw, shift drum locating: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Screw, shift lever: 14 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Screw, shift shaft retaining bracket: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Screw, starter motor: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Screw, stator: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Screw, timing chain shaft: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Starter motor torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Stator screw torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Upper guide rail screw torque: 8 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Clutch lubrication oil nozzle torque: 5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Remaining engine screws torque: 20 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Locking screw plug torque: 15 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Knock sensor screw torque: 20 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Oil pump idler gear screw torque: 15 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Exhaust flange stud torque: 15 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Conrod bearing screw first stage torque: 5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Conrod bearing screw second stage torque: 20 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Oil pressure sensor torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Bearing support screw plug torque: 12 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Cam lever axis screw plug torque: 8 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Timing chain tensioner screw torque: 8 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Coolant temperature sensor torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Cylinder head screw torque stage 1: 5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Cylinder head screw torque stage 2: 15 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Cylinder head oil drain screw plug torque: 15 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Water jacket screw plug torque: 20 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Inner clutch hub nut torque: 135 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Alternator cover screw plug torque: 8 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Engine oil capacity: 2.8 L",
+    "category": "fluids"
+  },
+  {
+    "fact": "Fuel tank capacity: 20 L",
+    "category": "fluids"
+  },
+  {
+    "fact": "Fuel reserve capacity: 3 L",
+    "category": "fluids"
+  },
+  {
+    "fact": "Fuel type: Super unleaded ROZ 95",
+    "category": "consumables"
+  },
+  {
+    "fact": "Fuel capacity: 20 L",
+    "category": "fluids"
+  },
+  {
+    "fact": "Fuel reserve: 3 L",
+    "category": "fluids"
+  },
+  {
+    "fact": "Front suspension travel: 240 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Rear suspension travel: 240 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Front brake disc diameter: 320 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Rear brake disc diameter: 260 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Front brake disc wear limit: 4.5 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Rear brake disc wear limit: 4.5 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Front tyre pressure solo/with passenger: 2.4 bar",
+    "category": "tyre_pressures"
+  },
+  {
+    "fact": "Rear tyre pressure solo/with passenger: 2.4 bar",
+    "category": "tyre_pressures"
+  },
+  {
+    "fact": "Front offroad tyre pressure: 1.8 bar",
+    "category": "tyre_pressures"
+  },
+  {
+    "fact": "Rear offroad tyre pressure: 1.8 bar",
+    "category": "tyre_pressures"
+  },
+  {
+    "fact": "Front tyre pressure full payload: 2.6 bar",
+    "category": "tyre_pressures"
+  },
+  {
+    "fact": "Rear tyre pressure full payload: 2.9 bar",
+    "category": "tyre_pressures"
+  },
+  {
+    "fact": "Chain size: 5/8 x 1/4” (520) X‑ring",
+    "category": "consumables"
+  },
+  {
+    "fact": "Wheelbase: 1,528 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Seat height, unloaded: 880 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Ground clearance, unloaded: 263 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Shock absorber fitted length: 380 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Shock absorber spring length: 201.3 mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Shock absorber spring rate for rider weight 75-85 kg: 95 N/mm",
+    "category": "adjustments"
+  },
+  {
+    "fact": "Shock absorber gas pressure: 16 bar",
+    "category": "tyre_pressures"
+  },
+  {
+    "fact": "Brake fluid reservoir cover torque, front: 2 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Brake fluid reservoir cover torque, rear: 1.5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Nut, valve torque: 12 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Screw, inside cover on radiator torque: 4.5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Radiator inside cover screw torque: 4.5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Tail light screw torque: 1.5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Electrical accessories socket torque: 4 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Throttle valve body hose clamp torque: 2.8 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Chassis nuts torque: 3 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Chassis screws torque: 3 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Left fixed grip screw torque: 3 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Chassis nuts torque: 5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Chassis screws torque: 5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Air filter box screw torque: 3 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Rear brake fluid reservoir screw torque: 5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Brake line holder screw torque: 1 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Combination instrument screw torque: 1 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Left combination switch screw torque: 2 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Right combination switch screw torque: 5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Foot brake lever stub screw torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Fork protector screw torque: 5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Fuel level sensor screw torque: 3 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Fuel tank insert screw torque: 3 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Headlight mask screw torque: 3.5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Heat guard screw torque: 5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Front mask support instrument screw torque: 5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Rear mask support instrument screw torque: 5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Torque for instrument support screw: 5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Torque for license plate holder screw: 5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Torque for lower rear panel screw: 3 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Torque for mask support screw: 5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Torque for mask support cover screw: 3.5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Torque for side stand sensor screw: 2 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Torque for splash protector screw: 2.8 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Torque for trim screw: 3 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Torque for spoke nipple: 6 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Torque for rear brake cylinder screw: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Torque for hand guard fitting: 6 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Torque for foot brake lever adjustment nut: 6 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Torque for hand brake lever nut: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Torque for push rod foot brake lever nut: 6 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Torque for shift rod nut: 6 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Torque for shift rod nut (LH): 6 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Torque for remaining chassis nuts: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Torque for activated carbon filter screw: 8 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Torque for fuel tank cover screw cap: 8 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Torque for 6-D sensor screw: 5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Torque for ABS module screw: 8 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Torque for battery cover attachment screw: 5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Torque for battery terminal screw: 4.5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Torque for brace for mask support center part screw: 3 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Battery holding bracket torque: 4.5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Battery terminal screw torque: 4.5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Brace for mask support center part torque: 3 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Brake assembly screw torque: 5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Starter motor cable screw torque: 5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Starter relay cable screw torque: 4.5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Clutch assembly screw torque: 5 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Rear cross member screw torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Rear cross member screw torque: 6 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Engine guard retaining bracket screw torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Exhaust clamp on main silencer screw torque: 8 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Rear footrest bracket screw torque: 9 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Front brake disc screw torque: 14 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Fuel pump screw torque: 6 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Fuel tank clamp screw torque: 3 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Fuel tank cover screw torque: 8 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Fuel tank spoiler attachment screw torque: 4 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Fuel tap screw torque: 6 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Ground wire on frame screw torque: 6 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Ground wire on starter motor screw torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Ground wire on starter motor torque: 6 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Ignition lock screw torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Magnetic holder on side stand screw torque: 2 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Mask support on frame screw torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Mask support on steering head screw torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Push rod ball joint on rear brake cylinder screw torque: 6 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Rear brake disc screw torque: 14 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Seat lock screw torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Shift shaft deflector on shift shaft screw torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Voltage regulator screw torque: 6 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Rear sprocket screw nut torque: 35 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Rear brake caliper pin torque: 22 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Remaining nuts on chassis torque: 25 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Remaining screws on chassis torque: 25 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Bottom triple clamp screw torque: 12 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Engine fixing arm linkage bracket torque: 25 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Engine guard frame torque: 25 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Foot brake lever return spring pin torque: 12 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Fork stub torque: 15 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Front brake caliper torque: 25 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Grab handle torque: 25 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Handlebar clamp torque: 20 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Main silencer fastening torque: 15 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Presilencer on frame torque: 15 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Rear footrest bracket torque: 25 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Seat bracket torque: 25 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Shift lever torque: 25 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Spring holder plate on side stand bracket torque: 15 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Steering damper on holder torque: 8 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Steering damper on triple clamp torque: 8 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Steering stem torque: 20 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Subframe torque: 25 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Top triple clamp torque: 15 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Securing bolt for brake linings torque: 10 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Remaining nuts, chassis torque: 45 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Remaining screws, chassis torque: 45 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Engine bracket torque: 45 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Front footrest bracket torque: 45 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Handlebar support torque: 45 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Side stand torque: 40 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Subframe torque: 50 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Banjo bolt brake line torque: 25 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Turn signal nut torque: 4 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Front brake caliper torque: 45 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Bottom shock absorber torque: 80 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Swingarm pivot torque: 100 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Top shock absorber torque: 80 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Lambda sensor torque: 50 Nm",
+    "category": "torque_specs"
+  },
+  {
+    "fact": "Service interval: every 48 months",
+    "category": "service_intervals"
+  },
+  {
+    "fact": "Service interval: every 24 months",
+    "category": "service_intervals"
+  },
+  {
+    "fact": "Service interval: every 12 months",
+    "category": "service_intervals"
+  },
+  {
+    "fact": "Service interval: every 30,000 km",
+    "category": "service_intervals"
+  },
+  {
+    "fact": "Service interval: every 18,600 miles",
+    "category": "service_intervals"
+  },
+  {
+    "fact": "Service interval: every 30,000 km (18,600 mi)",
+    "category": "service_intervals"
+  },
+  {
+    "fact": "Service interval: every 15,000 km (9,300 mi)",
+    "category": "service_intervals"
+  },
+  {
+    "fact": "Service interval: after 1,000 km (620 mi)",
+    "category": "service_intervals"
+  }
+]

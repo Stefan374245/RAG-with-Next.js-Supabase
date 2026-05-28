@@ -9,6 +9,20 @@ const CORS = {
 type Chunk = { content: string; metadata: { make?: string; model?: string } }
 type StreamChunk = OpenAI.Chat.Completions.ChatCompletionChunk
 
+// Extracts user id (sub) from JWT — returns null for unauthenticated / anon requests.
+function extractUserId(req: Request): string | null {
+  const auth = req.headers.get('Authorization') ?? ''
+  if (!auth.startsWith('Bearer ')) return null
+  try {
+    const payload = JSON.parse(atob(auth.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')))
+    // Supabase anon key also has a JWT — filter it out by checking the role claim
+    if (payload.role === 'anon') return null
+    return payload.sub ?? null
+  } catch {
+    return null
+  }
+}
+
 function corsJson(body: object, status = 200): Response {
   return new Response(JSON.stringify(body), { status, headers: { ...CORS, 'Content-Type': 'application/json' } })
 }
@@ -33,13 +47,27 @@ async function translateToEnglish(openai: OpenAI, text: string): Promise<string>
 }
 
 // deno-lint-ignore no-explicit-any
-async function searchChunks(supabase: any, embedding: number[], make?: string, model?: string): Promise<Chunk[]> {
+async function searchPublicChunks(supabase: any, embedding: number[], make?: string, model?: string): Promise<Chunk[]> {
   const { data, error } = await supabase.rpc('match_rescue_chunks', {
     query_embedding: `[${embedding.join(',')}]`,
     bike_make: make ?? null,
     bike_model: model ?? null,
     match_threshold: 0.25,
     match_count: 8,
+  })
+  if (error) throw error
+  return data ?? []
+}
+
+// deno-lint-ignore no-explicit-any
+async function searchUserChunks(supabase: any, userId: string, embedding: number[], make?: string, model?: string): Promise<Chunk[]> {
+  const { data, error } = await supabase.rpc('match_user_chunks', {
+    p_user_id:       userId,
+    query_embedding: `[${embedding.join(',')}]`,
+    bike_make:       make ?? null,
+    bike_model:      model ?? null,
+    match_threshold: 0.25,
+    match_count:     6,
   })
   if (error) throw error
   return data ?? []
@@ -110,12 +138,22 @@ function buildSSEStream(completion: AsyncIterable<StreamChunk>): ReadableStream 
 async function handleRequest(req: Request): Promise<Response> {
   const { question, make, model } = await req.json()
   if (!question?.trim()) return corsJson({ error: 'question required' }, 400)
-  const openai = new OpenAI({ apiKey: Deno.env.get('OPENAI_API_KEY') })
+
+  const userId   = extractUserId(req)
+  const openai   = new OpenAI({ apiKey: Deno.env.get('OPENAI_API_KEY') })
   const supabase = createClient(Deno.env.get('SUPABASE_URL')!, Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!)
+
   const queryForEmbedding = await translateToEnglish(openai, question)
-  const embedding = await buildEmbedding(openai, queryForEmbedding)
-  const chunks = await searchChunks(supabase, embedding, make, model)
-  const { system, user } = buildMessages(question, buildContext(chunks), make, model)
+  const embedding         = await buildEmbedding(openai, queryForEmbedding)
+
+  // Run both searches in parallel — user chunks get priority in the context window
+  const [publicChunks, userChunks] = await Promise.all([
+    searchPublicChunks(supabase, embedding, make, model),
+    userId ? searchUserChunks(supabase, userId, embedding, make, model) : Promise.resolve([]),
+  ])
+  const allChunks = [...userChunks, ...publicChunks].slice(0, 10)
+
+  const { system, user } = buildMessages(question, buildContext(allChunks), make, model)
   const completion = await createCompletion(openai, system, user)
   return new Response(buildSSEStream(completion), {
     headers: { ...CORS, 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache', 'Connection': 'keep-alive' },
